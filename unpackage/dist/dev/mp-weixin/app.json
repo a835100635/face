@@ -1,0 +1,33 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/user/index",
+    "pages/login/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "black",
+    "selectedColor": "red",
+    "list": [
+      {
+        "text": "页面1",
+        "pagePath": "pages/index/index"
+      },
+      {
+        "text": "页面2",
+        "pagePath": "pages/user/index"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": ""
+    }
+  },
+  "usingComponents": {}
+}

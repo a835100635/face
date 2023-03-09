@@ -7,7 +7,16 @@
 			}
 		},
 		{
-            "path" : "pages/user/index/index",
+            "path" : "pages/user/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "user",
+                "enablePullDownRefresh": false
+            }
+            
+        },
+		{
+            "path" : "pages/login/index",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "user",
@@ -17,16 +26,16 @@
         }
     ],
 	"tabBar": {
-		"color": "red",
-		"selectedColor": "yellow",
+		"color": "black",
+		"selectedColor": "red",
 		"list": [
 			{
-				"text": "1",
+				"text": "页面1",
 				"pagePath": "pages/index/index"
 			},
 			{
-				"text": "2",
-				"pagePath": "pages/user/index/index"
+				"text": "页面2",
+				"pagePath": "pages/user/index"
 			}
 		]
 	},
