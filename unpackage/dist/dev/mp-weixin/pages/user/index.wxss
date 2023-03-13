@@ -23,6 +23,6 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.user-block {
+.user-main {
   font-size: 10px;
 }

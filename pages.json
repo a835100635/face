@@ -45,5 +45,10 @@
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
-	"uniIdRouter": {}
+	"uniIdRouter": {},
+	"permission": {
+	    "scope.userLocation": {
+	        "desc": "位置信息用于..."
+	    }
+	}
 }

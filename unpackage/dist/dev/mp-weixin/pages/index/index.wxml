@@ -1,1 +1,1 @@
-<view class="container"><image src="{{a}}" alt="" srcset=""></image><button bindtap="{{b}}">获取</button></view>
+<view class="container"> 111 </view>

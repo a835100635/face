@@ -7301,5 +7301,4 @@ exports.createSSRApp = createSSRApp;
 exports.createStore = createStore;
 exports.index = index;
 exports.o = o;
-exports.unref = unref;
 exports.useStore = useStore;

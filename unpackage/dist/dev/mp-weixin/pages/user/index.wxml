@@ -1,1 +1,1 @@
-<view class="user-block"></view>
+<view class="user-main"><button bindtap="{{a}}">获取dd</button></view>
