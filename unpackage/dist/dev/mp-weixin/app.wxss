@@ -1,0 +1,40 @@
+
+	/*每个页面公共css */
+
+@font-face {
+  font-family: "iconfont"; /* Project id 3949301 */
+  /* Color fonts */
+  src: 
+       url('//at.alicdn.com/t/c/font_3949301_3mefjiox57i.woff2?t=1678700897345') format('woff2'),
+       url('//at.alicdn.com/t/c/font_3949301_3mefjiox57i.woff?t=1678700897345') format('woff'),
+       url('//at.alicdn.com/t/c/font_3949301_3mefjiox57i.ttf?t=1678700897345') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-java:before {
+  content: "\e639";
+}
+
+.icon-Vue:before {
+  content: "\e799";
+}
+
+.icon-css:before {
+  content: "\e61e";
+}
+
+.icon-html:before {
+  content: "\e632";
+}
+
+.icon-Javascript-icon-02:before {
+  content: "\e633";
+}
+page{--status-bar-height:25px;--top-window-height:0px;--window-top:0px;--window-bottom:0px;--window-left:0px;--window-right:0px;--window-magin:0px}[data-c-h="true"]{display: none !important;}

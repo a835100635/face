@@ -1,5 +1,5 @@
 <template>
-	<view class="user-block">
+	<view>
 		
 	</view>
 </template>
@@ -15,7 +15,5 @@
 </script>
 
 <style lang="scss">
-.user-block {
-	font-size: 10px;
-}
+
 </style>
