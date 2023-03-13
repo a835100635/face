@@ -3,14 +3,14 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "index"
+				"navigationBarTitleText": "面试题"
 			}
 		},
 		{
             "path" : "pages/user/index",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "user",
+                "navigationBarTitleText": "个人中心",
                 "enablePullDownRefresh": false
             }
             
@@ -19,22 +19,29 @@
             "path" : "pages/login/index",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "user",
+                "navigationBarTitleText": "登录",
+                "enablePullDownRefresh": false
+            }
+        },
+		{
+            "path" : "pages/topic/index",
+            "style" :                                                                                    
+            {
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
     ],
 	"tabBar": {
 		"color": "black",
 		"selectedColor": "red",
 		"list": [
 			{
-				"text": "页面1",
+				"text": "首页",
 				"pagePath": "pages/index/index"
 			},
 			{
-				"text": "页面2",
+				"text": "个人中心",
 				"pagePath": "pages/user/index"
 			}
 		]

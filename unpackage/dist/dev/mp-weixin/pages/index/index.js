@@ -15,35 +15,42 @@ const _sfc_main = {
     const data = common_vendor.ref([
       {
         label: "前端",
+        type: 0,
         child: [
           {
             label: "HTML",
             icon: "icon-html",
+            categoryId: 0,
             count: 100
           },
           {
             label: "CSS",
             icon: "icon-css",
+            categoryId: 1,
             count: 100
           },
           {
             label: "JavaScript",
             icon: "icon-Javascript-icon-02",
+            categoryId: 2,
             count: 100
           },
           {
             label: "VUE",
             icon: "icon-Vue",
+            categoryId: 3,
             count: 100
           }
         ]
       },
       {
         label: "后端",
+        type: 1,
         child: [
           {
             label: "JAVA",
             icon: "icon-java",
+            categoryId: 4,
             count: 100
           }
         ]
@@ -51,6 +58,11 @@ const _sfc_main = {
     ]);
     const navTo = (item) => {
       console.log(item);
+    };
+    const handleSelect = (main, child) => {
+      common_vendor.index.navigateTo({
+        url: `/pages/topic/index?type=${main.type}&categoryId=${child.categoryId}&title=${child.label}`
+      });
     };
     const onPulling = (e) => {
       console.log("onPulling", e);
@@ -82,7 +94,8 @@ const _sfc_main = {
                 a: common_vendor.n(`iconfont ${child.icon}`),
                 b: common_vendor.t(child.label),
                 c: common_vendor.t(child.count),
-                d: common_vendor.n(child_index)
+                d: common_vendor.n(child_index),
+                e: common_vendor.o(($event) => handleSelect(item, child))
               };
             }),
             c: index
@@ -96,5 +109,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/lichunlin/code/gitHub/face/pages/index/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "I:/face/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

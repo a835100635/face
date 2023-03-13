@@ -3,7 +3,7 @@
 		<scroll-view
 			scroll-y 
 			style="width: 100%; height: 100%"
-			refresher-background="lightgreen"
+			refresher-background="#fff"
 			:refresher-triggered="isRefresher"
 			:refresher-threshold="100"
 			:refresher-enabled="true"
@@ -26,7 +26,7 @@
 				<view class="category-item" v-for="(item, index) in data" :key="index">
 					<view class="title">{{ item.label }}</view>
 					<view class="item-wrap">
-						<view class="item" v-for="(child, child_index) in item.child" :class="child_index">
+						<view class="item" v-for="(child, child_index) in item.child" :class="child_index" @click="handleSelect(item, child)">
 							<view class="content">
 								<i :class="`iconfont ${child.icon}`" />
 								<view class="title">{{ child.label }}</view>
@@ -56,35 +56,42 @@ const carouselList = ref([
 const data = ref([
 	{
 		label: '前端',
+		type: 0,
 		child: [
 			{
 				label: 'HTML',
 				icon: 'icon-html',
+				categoryId: 0,
 				count: 100
 			},
 			{
 				label: 'CSS',
 				icon: 'icon-css',
+				categoryId: 1,
 				count: 100
 			},
 			{
 				label: 'JavaScript',
 				icon: 'icon-Javascript-icon-02',
+				categoryId: 2,
 				count: 100
 			},
 			{
 				label: 'VUE',
 				icon: 'icon-Vue',
+				categoryId: 3,
 				count: 100
 			}
 		]
 	},
 	{
 		label: '后端',
+		type: 1,
 		child: [
 			{
 				label: 'JAVA',
 				icon: 'icon-java',
+				categoryId: 4,
 				count: 100
 			}
 		]
@@ -94,6 +101,15 @@ const data = ref([
 const navTo = (item) => {
 	console.log(item);
 }
+
+
+// 选择类型
+const handleSelect = (main, child) => {
+	uni.navigateTo({
+		url: `/pages/topic/index?type=${main.type}&categoryId=${child.categoryId}&title=${child.label}`
+	})
+}
+
 
 // 下拉刷新触发
 const onPulling = (e) => {
@@ -120,6 +136,7 @@ const onRestore = (e) => {
 		background-color: rgba(0,0,0,.04);
 		.swiper-main {
 			height: 180px;
+			box-shadow: 0 0px 10px #333;
 			.swiper {
 				height: 100%;
 				.image-wrapper {
@@ -134,6 +151,7 @@ const onRestore = (e) => {
 		}
 		
 		.category-main {
+			box-shadow: 0 0 10px #ccc;
 			margin-top: 16px;
 			padding: 0 20px;
 			background-color: #fff;

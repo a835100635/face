@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/user/index",
-    "pages/login/index"
+    "pages/login/index",
+    "pages/topic/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -15,18 +16,18 @@
     "selectedColor": "red",
     "list": [
       {
-        "text": "页面1",
+        "text": "首页",
         "pagePath": "pages/index/index"
       },
       {
-        "text": "页面2",
+        "text": "个人中心",
         "pagePath": "pages/user/index"
       }
     ]
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "ss"
+      "desc": "..."
     }
   },
   "usingComponents": {}
