@@ -14,7 +14,7 @@
 			<!-- 轮播图 -->
 			<view class="swiper-main">
 				<swiper class="swiper" indicator-dots circular=true duration="400">
-					<swiper-item class="swiper-item" v-for="(item,index) in carouselList" :key="index"  @click="navTo(item)">
+					<swiper-item class="swiper-item" v-for="(item, index) in carouselList" :key="item.type"  @click="navTo(item)">
 						<view class="image-wrapper">
 							<image :src="item.image" class="loaded"	mode="aspectFill"></image>
 						</view>
@@ -26,7 +26,7 @@
 				<view class="category-item" v-for="(item, index) in data" :key="index">
 					<view class="title">{{ item.label }}</view>
 					<view class="item-wrap">
-						<view class="item" v-for="(child, child_index) in item.child" :class="child_index" @click="handleSelect(item, child)">
+						<view class="item" v-for="(child, child_index) in item.child" :key="child_index" :class="child_index" @click="handleSelect(item, child)">
 							<view class="content">
 								<i :class="`iconfont ${child.icon}`" />
 								<view class="title">{{ child.label }}</view>
@@ -133,7 +133,7 @@ const onRestore = (e) => {
 
 <style lang="scss">
 	.container {
-		background-color: rgba(0,0,0,.04);
+		background-color: #f6f6f6;
 		.swiper-main {
 			height: 180px;
 			box-shadow: 0 0px 10px #333;

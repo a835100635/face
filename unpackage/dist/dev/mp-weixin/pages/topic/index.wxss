@@ -23,6 +23,39 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.topic-main {
+  padding: 10px;
+  background-color: #f6f6f6;
+  min-height: 100vh;
+}
 .topic-main .title {
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.topic-main .main {
+  background-color: white;
+  padding: 0 14px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.topic-main .main .item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  color: #333;
+  font-size: 14px;
+}
+.topic-main .main .item .content {
+  flex: 11;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topic-main .main .item .iconfont {
+  margin-left: 6px;
+}
+.topic-main .main .item + .item {
+  border-top: 1px solid #ccc;
 }

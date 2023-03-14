@@ -82,8 +82,8 @@ const _sfc_main = {
         a: common_vendor.f(carouselList.value, (item, index, i0) => {
           return {
             a: item.image,
-            b: index,
-            c: common_vendor.o(($event) => navTo(item), index)
+            b: item.type,
+            c: common_vendor.o(($event) => navTo(item), item.type)
           };
         }),
         b: common_vendor.f(data.value, (item, index, i0) => {
@@ -94,8 +94,9 @@ const _sfc_main = {
                 a: common_vendor.n(`iconfont ${child.icon}`),
                 b: common_vendor.t(child.label),
                 c: common_vendor.t(child.count),
-                d: common_vendor.n(child_index),
-                e: common_vendor.o(($event) => handleSelect(item, child))
+                d: child_index,
+                e: common_vendor.n(child_index),
+                f: common_vendor.o(($event) => handleSelect(item, child), child_index)
               };
             }),
             c: index
@@ -109,5 +110,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "I:/face/pages/index/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/lichunlin/code/gitHub/face/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

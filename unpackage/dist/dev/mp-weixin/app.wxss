@@ -5,9 +5,9 @@
   font-family: "iconfont"; /* Project id 3949301 */
   /* Color fonts */
   src: 
-       url('//at.alicdn.com/t/c/font_3949301_3mefjiox57i.woff2?t=1678700897345') format('woff2'),
-       url('//at.alicdn.com/t/c/font_3949301_3mefjiox57i.woff?t=1678700897345') format('woff'),
-       url('//at.alicdn.com/t/c/font_3949301_3mefjiox57i.ttf?t=1678700897345') format('truetype');
+       url('//at.alicdn.com/t/c/font_3949301_qvh7v75yfb.woff2?t=1678757519864') format('woff2'),
+       url('//at.alicdn.com/t/c/font_3949301_qvh7v75yfb.woff?t=1678757519864') format('woff'),
+       url('//at.alicdn.com/t/c/font_3949301_qvh7v75yfb.ttf?t=1678757519864') format('truetype');
 }
 
 .iconfont {
@@ -16,6 +16,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-youjiantou:before {
+  content: "\e68c";
 }
 
 .icon-java:before {

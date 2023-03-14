@@ -24,7 +24,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 .container {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: #f6f6f6;
 }
 .container .swiper-main {
   height: 180px;

@@ -1,1 +1,1 @@
-<view class="topic-main"><view class="title"></view></view>
+<view class="topic-main"><view class="title"> 共{{a}}道 </view><view class="main"><view wx:for="{{b}}" wx:for-item="item" wx:key="b" class="item"><label class="needs">{{item.a}}、</label><label class="content">阿斯顿阿斯顿阿斯顿阿斯顿阿斯顿阿斯顿阿斯顿阿斯顿</label><view class="iconfont icon-youjiantou"></view></view></view></view>
