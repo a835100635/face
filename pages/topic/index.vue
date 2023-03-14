@@ -4,7 +4,7 @@
 			共{{total}}道
 		</view>
 		<view class="main">
-			<view class="item" v-for="(item,index) in 60" :key="index">
+			<view class="item" v-for="(item,index) in 60" :key="index" @click="handleSelect(item, index)">
 				<span class="needs">{{ index+1 }}、</span>
 				<span class="content">阿斯顿阿斯顿阿斯顿阿斯顿阿斯顿阿斯顿阿斯顿阿斯顿</span>
 				<i class="iconfont icon-youjiantou"></i>
@@ -27,6 +27,14 @@ export default {
 <script setup>
 	import { ref } from 'vue';
 	const total = ref(99);  
+	
+	const handleSelect = (item, index) => {
+		console.log(item, index);
+		uni.navigateTo({
+			url:'/pages/detail/index'
+		})
+	}
+	
 </script>
 
 <style lang="scss">

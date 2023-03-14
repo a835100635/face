@@ -1,0 +1,1 @@
+<view class="detail-main"><view class="topic"> 1、{{a}}</view><view class="content"><view class="tip"><view class="iconfont icon-cankaodaan"></view> 答案解析 </view><view class="answer">{{b}}</view></view><view class="footer"><view class="button pre"> 上一题 </view><view class="button next"> 下一题 </view></view></view>
