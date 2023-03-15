@@ -32,5 +32,5 @@ const _sfc_main = /* @__PURE__ */ Object.assign(__default__, {
     };
   }
 });
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "I:/face/pages/topic/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/lichunlin/code/gitHub/face/pages/topic/index.vue"]]);
 wx.createPage(MiniProgramPage);

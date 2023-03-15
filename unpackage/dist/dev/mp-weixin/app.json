@@ -28,7 +28,7 @@
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "..."
+      "desc": ""
     }
   },
   "usingComponents": {}
