@@ -7,45 +7,41 @@
 			}
 		},
 		{
-            "path" : "pages/user/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "个人中心",
-                "enablePullDownRefresh": false
-            }
-            
-        },
+			"path": "pages/user/index",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"enablePullDownRefresh": false
+			}
+
+		},
 		{
-            "path" : "pages/login/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "登录",
-                "enablePullDownRefresh": false
-            }
-        },
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false
+			}
+		},
 		{
-            "path" : "pages/topic/index",
-            "style" :                                                                                    
-            {
-                "enablePullDownRefresh": false
-            }
-            
-        },
+			"path": "pages/topic/index",
+			"style": {
+				// 是否支持下拉上拉加载事件
+				"enablePullDownRefresh": true
+			}
+
+		},
 		{
-            "path" : "pages/detail/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+			"path": "pages/detail/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
 	"tabBar": {
 		"color": "black",
 		"selectedColor": "red",
-		"list": [
-			{
+		"list": [{
 				"text": "首页",
 				"pagePath": "pages/index/index"
 			},
@@ -63,8 +59,8 @@
 	},
 	"uniIdRouter": {},
 	"permission": {
-	    "scope.userLocation": {
-	        "desc": "位置信息用于..."
-	    }
+		"scope.userLocation": {
+			"desc": "位置信息用于..."
+		}
 	}
 }

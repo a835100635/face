@@ -1,5 +1,8 @@
 
 	/*每个页面公共css */
+/* * {
+	background-color: #373e69;
+} */
 
 @font-face {
   font-family: "iconfont"; /* Project id 3949301 */

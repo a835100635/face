@@ -7,9 +7,7 @@
 			<view class="tip">
 				<i class="iconfont icon-cankaodaan"></i> 答案解析
 			</view>
-			<view class="answer">
-				{{ data.answer }}
-			</view>
+			<slect-component :data="data" v-if="isOption" :type="LEARNING_TYPE.VIEW"></slect-component>
 		</view>
 		<view class="footer">
 			<view class="button pre">
@@ -22,15 +20,42 @@
 	</view>
 </template>
 
-<script setup>
-	import {ref} from 'vue';
-const data = ref({
-	topic: '什么是DOCTYPE, 有何作用？',
-	// 
-	type: 0,
-	options: [],
-	answer: 'DOCTYPE标签是一种标准通用标记语言的文档类型声明，它的目的是要告诉标准通用标记语言解析器，它应该使用什么样的文档类型定义（DTD）来解析文档。'
-})
+<script>
+	import { getTopicDetail } from '@/api/topic.js';
+	import SlectComponent from './components/select.vue';
+	import { TOPIC_TYPE, LEARNING_TYPE } from '@/constans/index.js';
+export default {
+	components: {
+		SlectComponent
+	},
+	onLoad(e) {
+		uni.setNavigationBarTitle({
+			title: e.topic
+		})
+		this.options = e;
+		this.fetchData();
+	},
+	data() {
+		return {
+			options: null,
+			data: {}
+		}
+	},
+	computed: {
+		// 是否选项 选择 判断
+		isOption({ data }) {
+			const { type } = data;
+			const { SELECT, JUDGE } = TOPIC_TYPE;
+			return [SELECT, JUDGE].includes(type)
+		}
+	},
+	methods: {
+		async fetchData() {
+			const result = await getTopicDetail(this.options.id);
+			this.data = result;
+		}
+	}
+}
 </script>
 
 <style lang="scss">

@@ -21,16 +21,20 @@
 					</swiper-item>
 				</swiper>
 			</view>
+			<!-- 提示 -->
+			<view class="prompt">
+				2023-2-20 新增Vue3 10道面试题
+			</view>
 			<!-- 分类选择 -->
 			<view class="category-main">
-				<view class="category-item" v-for="(item, index) in data" :key="index">
+				<view class="category-item" v-for="(item, index) in category" :key="index">
 					<view class="title">{{ item.label }}</view>
 					<view class="item-wrap">
-						<view class="item" v-for="(child, child_index) in item.child" :key="child_index" :class="child_index" @click="handleSelect(item, child)">
+						<view class="item" v-for="(child, child_index) in item.child" :key="child.categoryId"  @click="handleSelect(item, child)">
 							<view class="content">
 								<i :class="`iconfont ${child.icon}`" />
-								<view class="title">{{ child.label }}</view>
-								<view class="count">{{ child.count }}</view>
+								<view class="title">{{ child.categoryName }}</view>
+								<!-- <view class="count">{{ child.count }}</view> -->
 							</view>
 						</view>
 					</view>
@@ -41,6 +45,7 @@
 </template>
 
 <script setup>
+import { getCategory } from '@/api/category.js';
 import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 // 下拉加载
@@ -53,50 +58,32 @@ const carouselList = ref([
 		image: 'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg',
 	},
 ]);
+
 const data = ref([
 	{
 		label: '前端',
 		type: 0,
-		child: [
-			{
-				label: 'HTML',
-				icon: 'icon-html',
-				categoryId: 0,
-				count: 100
-			},
-			{
-				label: 'CSS',
-				icon: 'icon-css',
-				categoryId: 1,
-				count: 100
-			},
-			{
-				label: 'JavaScript',
-				icon: 'icon-Javascript-icon-02',
-				categoryId: 2,
-				count: 100
-			},
-			{
-				label: 'VUE',
-				icon: 'icon-Vue',
-				categoryId: 3,
-				count: 100
-			}
-		]
+		child: []
 	},
 	{
 		label: '后端',
 		type: 1,
-		child: [
-			{
-				label: 'JAVA',
-				icon: 'icon-java',
-				categoryId: 4,
-				count: 100
-			}
-		]
+		child: []
 	}
-])
+]);
+// 获取分类
+const categoryList = async () => {
+	const result = await getCategory();
+	(Object.keys(result)).forEach((key) => {
+		const _ = data.value.find((i) => i.type == key);
+		_.child = result[key];
+	})
+}
+categoryList()
+const category = computed(() => {
+	return data.value.filter((_) => _.child.length > 1);
+})
+
 
 const navTo = (item) => {
 	console.log(item);
@@ -106,7 +93,7 @@ const navTo = (item) => {
 // 选择类型
 const handleSelect = (main, child) => {
 	uni.navigateTo({
-		url: `/pages/topic/index?type=${main.type}&categoryId=${child.categoryId}&title=${child.label}`
+		url: `/pages/topic/index?categoryId=${child.categoryId}&title=${child.categoryName}`
 	})
 }
 
@@ -134,6 +121,7 @@ const onRestore = (e) => {
 <style lang="scss">
 	.container {
 		background-color: #f6f6f6;
+		height: 100vh;
 		.swiper-main {
 			height: 180px;
 			box-shadow: 0 0px 10px #333;
@@ -149,17 +137,19 @@ const onRestore = (e) => {
 				}
 			}
 		}
-		
+		.prompt {
+			color: #427df7;
+			margin: 6px 10px;
+		}
 		.category-main {
-			box-shadow: 0 0 10px #ccc;
-			margin-top: 16px;
-			padding: 0 20px;
-			background-color: #fff;
 			overflow: hidden;
 			.category-item {
-				margin: 20px 0;
+				overflow: hidden;
+				margin: 0 10px 10px;
+				background-color: #fff;
+				border-radius: 8px;
 				.title {
-					padding: 0;
+					margin: 10px 0 0 10px;
 				}
 				.item-wrap {
 					display: flex;
@@ -179,7 +169,7 @@ const onRestore = (e) => {
 							height: 100px;
 							width: 100px;
 							border-radius: 10px;
-							box-shadow: 0px 0px 6px #CCCCCC;
+							box-shadow: 0px 0px 6px #dcdcdc;
 							.title {
 								font-size: 14px;
 								margin: 6px 0;

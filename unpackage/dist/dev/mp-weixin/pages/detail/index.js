@@ -1,22 +1,57 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const api_topic = require("../../api/topic.js");
+const constans_index = require("../../constans/index.js");
+require("../../api/base.js");
+require("../../store/index.js");
+require("../../api/user.js");
+const SlectComponent = () => "./components/select.js";
 const _sfc_main = {
-  __name: "index",
-  setup(__props) {
-    const data = common_vendor.ref({
-      topic: "什么是DOCTYPE, 有何作用？",
-      // 
-      type: 0,
-      options: [],
-      answer: "DOCTYPE标签是一种标准通用标记语言的文档类型声明，它的目的是要告诉标准通用标记语言解析器，它应该使用什么样的文档类型定义（DTD）来解析文档。"
+  components: {
+    SlectComponent
+  },
+  onLoad(e) {
+    common_vendor.index.setNavigationBarTitle({
+      title: e.topic
     });
-    return (_ctx, _cache) => {
-      return {
-        a: common_vendor.t(data.value.topic),
-        b: common_vendor.t(data.value.answer)
-      };
+    this.options = e;
+    this.fetchData();
+  },
+  data() {
+    return {
+      options: null,
+      data: {}
     };
+  },
+  computed: {
+    // 是否选项 选择 判断
+    isOption({ data }) {
+      const { type } = data;
+      const { SELECT, JUDGE } = constans_index.TOPIC_TYPE;
+      return [SELECT, JUDGE].includes(type);
+    }
+  },
+  methods: {
+    async fetchData() {
+      const result = await api_topic.getTopicDetail(this.options.id);
+      this.data = result;
+    }
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/lichunlin/code/gitHub/face/pages/detail/index.vue"]]);
+if (!Array) {
+  const _component_slect_component = common_vendor.resolveComponent("slect-component");
+  _component_slect_component();
+}
+function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return common_vendor.e({
+    a: common_vendor.t($data.data.topic),
+    b: $options.isOption
+  }, $options.isOption ? {
+    c: common_vendor.p({
+      data: $data.data,
+      type: _ctx.LEARNING_TYPE.VIEW
+    })
+  } : {});
+}
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/lichunlin/code/gitHub/face/pages/detail/index.vue"]]);
 wx.createPage(MiniProgramPage);
