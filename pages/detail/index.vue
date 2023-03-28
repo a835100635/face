@@ -7,7 +7,7 @@
 			<view class="tip">
 				<i class="iconfont icon-cankaodaan"></i> 答案解析
 			</view>
-			<slect-component :data="data" v-if="isOption" :type="LEARNING_TYPE.VIEW"></slect-component>
+			<slect-component :data="data"></slect-component>
 		</view>
 		<view class="footer">
 			<view class="button pre">
@@ -21,9 +21,9 @@
 </template>
 
 <script>
-	import { getTopicDetail } from '@/api/topic.js';
-	import SlectComponent from './components/select.vue';
-	import { TOPIC_TYPE, LEARNING_TYPE } from '@/constans/index.js';
+import { getTopicDetail } from '@/api/topic.js';
+import SlectComponent from './components/select.vue';
+import { TOPIC_TYPE, LEARNING_TYPE } from '@/constans/index.js';
 export default {
 	components: {
 		SlectComponent
@@ -53,6 +53,7 @@ export default {
 		async fetchData() {
 			const result = await getTopicDetail(this.options.id);
 			this.data = result;
+			console.log('result==>', this.data )
 		}
 	}
 }

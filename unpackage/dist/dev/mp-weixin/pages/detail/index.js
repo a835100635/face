@@ -35,6 +35,7 @@ const _sfc_main = {
     async fetchData() {
       const result = await api_topic.getTopicDetail(this.options.id);
       this.data = result;
+      console.log("result==>", this.data);
     }
   }
 };
@@ -43,15 +44,12 @@ if (!Array) {
   _component_slect_component();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return common_vendor.e({
+  return {
     a: common_vendor.t($data.data.topic),
-    b: $options.isOption
-  }, $options.isOption ? {
-    c: common_vendor.p({
-      data: $data.data,
-      type: _ctx.LEARNING_TYPE.VIEW
+    b: common_vendor.p({
+      data: $data.data
     })
-  } : {});
+  };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/lichunlin/code/gitHub/face/pages/detail/index.vue"]]);
 wx.createPage(MiniProgramPage);

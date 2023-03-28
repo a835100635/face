@@ -1,29 +1,58 @@
 <template>
 	<view class="select-warp">
+		11
 		<view class="answer">
-			{{ answer }}
+			<!-- <view v-html="answer"></view> -->
+			<!-- <MpHtml class="mphtml" :content="answer"></MpHtml> -->
+			<rich-text :nodes="answer">
+				
+			</rich-text>
 		</view>
 	</view>
 </template>
 
-<script setup>
+<script>
 	import { computed, defineProps } from 'vue';
 	import { LEARNING_TYPE } from '@/constans/index.js';
-	const props = defineProps({
-		data: {
-			type: Object,
-			default: () => {}
+	import MpHtml from '../../../uni_modules/mp-html/components/mp-html/mp-html.vue'
+	export default {
+		name: 'SlectComponent',
+		comments: {
+			MpHtml
 		},
-		type: {
-			type: String,
-			default: LEARNING_TYPE.VIEW
+		props: {
+			data: {
+				type: Object,
+				default: () => {}
+			},
+			type: {
+				type: Number,
+				default: LEARNING_TYPE.VIEW
+			}
+		},
+		data() {
+			return {
+				answer: '<div'
+			}div
+		},
+		computed: {
+		},
+		created() {
+			console.log('props->', this.data, this.type, this.answer)
+		},
+		methods: {
+			mpHtmlLoad() {
+				console.log('mp-html load-->');
+			}
 		}
-	});
-	const answer = computed(() => {
-		return props.data.answer;
-	})
-	console.log('----', props.data)
+	}
+	
 </script>
 
 <style lang="scss">
+	.mphtml {
+		height: 100px;
+		width: 100px;
+		border: 1px solid red;
+	}
 </style>
