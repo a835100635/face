@@ -13,6 +13,7 @@ const fuiIcon = () => "../../components/firstui/fui-icon/fui-icon.js";
 const fuiLoadmore = () => "../../components/firstui/fui-loadmore/fui-loadmore.js";
 const fuiButton = () => "../../components/firstui/fui-button/fui-button.js";
 const fuiLoading = () => "../../components/firstui/fui-loading/fui-loading.js";
+const fuiText = () => "../../components/firstui/fui-text/fui-text.js";
 const _sfc_main = {
   components: {
     SlectComponent,
@@ -21,7 +22,8 @@ const _sfc_main = {
     fuiIcon,
     fuiLoadmore,
     fuiButton,
-    fuiLoading
+    fuiLoading,
+    fuiText
   },
   onLoad(e) {
     common_vendor.index.setNavigationBarTitle({
@@ -108,8 +110,9 @@ if (!Array) {
   const _component_fui_button = common_vendor.resolveComponent("fui-button");
   const _component_fui_loadmore = common_vendor.resolveComponent("fui-loadmore");
   const _component_fui_empty = common_vendor.resolveComponent("fui-empty");
+  const _component_fui_text = common_vendor.resolveComponent("fui-text");
   const _component_fui_loading = common_vendor.resolveComponent("fui-loading");
-  (_component_slect_component + _component_fui_icon + _component_fui_avatar + _component_fui_button + _component_fui_loadmore + _component_fui_empty + _component_fui_loading)();
+  (_component_slect_component + _component_fui_icon + _component_fui_avatar + _component_fui_button + _component_fui_loadmore + _component_fui_empty + _component_fui_text + _component_fui_loading)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return common_vendor.e({
@@ -164,8 +167,22 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       size: "30"
     })
   } : {}, {
-    o: $data.fetchLoading,
+    o: common_vendor.p({
+      name: "fabulous-fill"
+    }),
     p: common_vendor.p({
+      text: $data.data.like,
+      size: 24
+    }),
+    q: common_vendor.p({
+      name: "stepon-fill"
+    }),
+    r: common_vendor.p({
+      text: $data.data.dislike,
+      size: 24
+    }),
+    s: $data.fetchLoading,
+    t: common_vendor.p({
       type: "col"
     })
   });

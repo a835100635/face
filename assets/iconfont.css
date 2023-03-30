@@ -2,9 +2,9 @@
   font-family: "iconfont"; /* Project id 3949301 */
   /* Color fonts */
   src: 
-       url('//at.alicdn.com/t/c/font_3949301_ue3tlmrkmrp.woff2?t=1680145304568') format('woff2'),
-       url('//at.alicdn.com/t/c/font_3949301_ue3tlmrkmrp.woff?t=1680145304568') format('woff'),
-       url('//at.alicdn.com/t/c/font_3949301_ue3tlmrkmrp.ttf?t=1680145304568') format('truetype');
+       url('//at.alicdn.com/t/c/font_3949301_lxaxk9r3s0o.woff2?t=1680166931240') format('woff2'),
+       url('//at.alicdn.com/t/c/font_3949301_lxaxk9r3s0o.woff?t=1680166931240') format('woff'),
+       url('//at.alicdn.com/t/c/font_3949301_lxaxk9r3s0o.ttf?t=1680166931240') format('truetype');
 }
 
 .iconfont {
@@ -15,8 +15,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-chakanxiangqing:before {
-  content: "\e604";
+.icon-pinglun:before {
+  content: "\e60d";
+}
+
+.icon-like-full:before {
+  content: "\e9a2";
+}
+
+.icon-badreview-full:before {
+  content: "\e9a4";
 }
 
 .icon-cankaodaan:before {

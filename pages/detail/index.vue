@@ -21,6 +21,8 @@
 							留言列表 
 							<text class="total">({{ commentData.total }})</text>
 						</text>
+						<!-- 评论 -->
+						<i class="iconfont icon-pinglun"></i>
 					</view>
 					<view class="comment-list" v-if="commentData.data.length">
 						<view class="comment-item" v-for="item in commentData.data" :key="item.id">
@@ -69,6 +71,13 @@
 				下一题
 			</view>
 		</view>
+		<!-- 点赞、点踩 -->
+		<view class="button-group">
+			<fui-icon class="iconfont" name="fabulous-fill"></fui-icon>
+			<fui-text class="text" :text="data.like" :size="24"></fui-text>
+			<fui-icon class="iconfont" name="stepon-fill"></fui-icon>
+			<fui-text class="text" :text="data.dislike" :size="24"></fui-text>
+		</view>
 		<!-- loading -->
 		<fui-loading type="col" v-show="fetchLoading"></fui-loading>
 	</view>
@@ -85,6 +94,7 @@ import fuiIcon from "@/components/firstui/fui-icon/fui-icon.vue"
 import fuiLoadmore from "@/components/firstui/fui-loadmore/fui-loadmore.vue"
 import fuiButton from "@/components/firstui/fui-button/fui-button.vue"
 import fuiLoading from "@/components/firstui/fui-loading/fui-loading.vue"
+import fuiText from "@/components/firstui/fui-text/fui-text.vue"
 
 
 import emptyImg from '@/assets/images/empty.png'
@@ -96,7 +106,8 @@ export default {
 		fuiIcon,
 		fuiLoadmore,
 		fuiButton,
-		fuiLoading
+		fuiLoading,
+		fuiText
 	},
 	onLoad(e) {
 		uni.setNavigationBarTitle({
@@ -233,6 +244,9 @@ export default {
 					font-size: 14px;
 					border-bottom: 1px solid #eeeeee;
 					padding: 0 0 10px;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
 					.total {
 						font-size: 12px;
 						color: #ccc;
@@ -291,6 +305,26 @@ export default {
 			justify-content: center;
 			align-items: center;
 			color: white;
+		}
+	}
+	.button-group {
+		position: fixed;
+		right: 22px;
+		bottom: 90px;
+		display: flex;
+		flex-direction: column;
+		.iconfont {
+			font-size: 12px;
+			.fui-icon {
+				color: #ccc !important;
+			}
+		}
+		.iconfont + .iconfont {
+			margin-top: 8px;
+		}
+		.text {
+			margin-top: -10px;
+			text-align: center;
 		}
 	}
 }
