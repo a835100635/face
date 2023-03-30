@@ -2,6 +2,12 @@
   "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "slect-component": "./components/select"
+    "slect-component": "./components/select",
+    "fui-empty": "../../components/firstui/fui-empty/fui-empty",
+    "fui-avatar": "../../components/firstui/fui-avatar/fui-avatar",
+    "fui-icon": "../../components/firstui/fui-icon/fui-icon",
+    "fui-loadmore": "../../components/firstui/fui-loadmore/fui-loadmore",
+    "fui-button": "../../components/firstui/fui-button/fui-button",
+    "fui-loading": "../../components/firstui/fui-loading/fui-loading"
   }
 }

@@ -82,21 +82,5 @@
 	"uniStatistics": {
 		"enable": false
 	},
-	"vueVersion": "3",
-	"h5": {
-		"devServer": {
-			// 开发环境
-			"proxy": {
-				// 代理转发 
-				//将你的接口最后公共部分提取出来
-				"/face": {
-					"target": "http://localhost:8621"
-				},
-				"/api": {
-					"target": "http://localhost:8621"
-				}
-
-			}
-		}
-	}
+	"vueVersion": "3"
 }

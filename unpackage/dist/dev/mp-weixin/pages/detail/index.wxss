@@ -24,41 +24,97 @@
 /* 透明度 */
 /* 文章场景相关 */
 .detail-main {
-  padding: 5px;
   background-color: #f6f6f6;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+}
+.detail-main .main-wrap {
+  flex: 1;
+  overflow: scroll;
+  padding: 10px;
   box-sizing: border-box;
 }
-.detail-main .topic {
+.detail-main .main-wrap .main .topic {
   background-color: white;
-  padding: 10px 5px;
+  padding: 10px;
   border-radius: 6px;
   box-sizing: border-box;
 }
-.detail-main .content {
+.detail-main .main-wrap .main .content {
   background-color: white;
-  padding: 10px 5px;
+  padding: 10px;
   margin-top: 20px;
   flex: 1;
   border-radius: 6px;
   box-sizing: border-box;
 }
-.detail-main .content .tip {
+.detail-main .main-wrap .main .content .tip {
   display: flex;
   align-items: center;
   font-weight: 600;
 }
-.detail-main .content .tip .iconfont {
+.detail-main .main-wrap .main .content .tip .iconfont {
   font-weight: 500;
   margin-right: 8px;
 }
-.detail-main .content .answer {
+.detail-main .main-wrap .main .content .answer {
   margin-top: 10px;
   padding: 0 10px;
   line-height: 1.8;
+}
+.detail-main .main-wrap .main .comment {
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 6px;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.detail-main .main-wrap .main .comment .empty {
+  margin-top: 10px;
+}
+.detail-main .main-wrap .main .comment .label {
+  font-size: 14px;
+  border-bottom: 1px solid #eeeeee;
+  padding: 0 0 10px;
+}
+.detail-main .main-wrap .main .comment .label .total {
+  font-size: 12px;
+  color: #ccc;
+}
+.detail-main .main-wrap .main .comment .comment-list {
+  margin-top: 16px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.detail-main .main-wrap .main .comment .comment-list .comment-item {
+  margin-bottom: 20px;
+  display: flex;
+}
+.detail-main .main-wrap .main .comment .comment-list .comment-item .avatar-img {
+  margin-right: 6px;
+}
+.detail-main .main-wrap .main .comment .comment-list .comment-item .message-wrap {
+  flex: 1;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+.detail-main .main-wrap .main .comment .comment-list .comment-item .message-wrap .name-time {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #999999;
+}
+.detail-main .main-wrap .main .comment .comment-list .comment-item .message-wrap .message-content {
+  margin-top: 20px;
+  color: #333;
+  font-size: 14px;
+}
+.detail-main .main-wrap .main .comment .comment-list .loadmore {
+  display: flex;
+  justify-content: center;
 }
 .detail-main .footer {
   display: flex;

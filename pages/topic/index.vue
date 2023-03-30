@@ -25,6 +25,7 @@
 <script>
 import { getTopicList } from '@/api/topic.js';
 import Loading from '@/components/loading.vue';
+import { CHECK_TYPE } from '@/constans/index.js';
 export default {
 	components: {
 		Loading
@@ -92,7 +93,7 @@ export default {
 		handleSelect(item, index){
 			const { topic, id } = item
 			uni.navigateTo({
-				url:`/pages/detail/index?topic=${topic}&id=${id}`
+				url:`/pages/detail/index?topic=${topic}&id=${id}&checkType=${CHECK_TYPE.READ}`
 			});
 		}
 	}

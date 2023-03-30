@@ -1,9 +1,9 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const api_topic = require("../../api/topic.js");
+const constans_index = require("../../constans/index.js");
 require("../../api/base.js");
 require("../../store/index.js");
-require("../../constans/index.js");
 require("../../api/user.js");
 const Loading = () => "../../components/loading.js";
 const _sfc_main = {
@@ -72,7 +72,7 @@ const _sfc_main = {
     handleSelect(item, index) {
       const { topic, id } = item;
       common_vendor.index.navigateTo({
-        url: `/pages/detail/index?topic=${topic}&id=${id}`
+        url: `/pages/detail/index?topic=${topic}&id=${id}&checkType=${constans_index.CHECK_TYPE.READ}`
       });
     }
   }

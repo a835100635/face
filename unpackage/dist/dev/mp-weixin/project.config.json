@@ -16,10 +16,12 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "condition": false
+    "condition": false,
+    "ignoreUploadUnusedFiles": true,
+    "ignoreDevUnusedFiles": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.30.2",
+  "libVersion": "2.25.3",
   "appid": "wx3072e210335fc176",
   "projectname": "face",
   "condition": {},
