@@ -63,62 +63,6 @@
   padding: 0 10px;
   line-height: 1.8;
 }
-.detail-main .main-wrap .main .comment {
-  margin-top: 20px;
-  background-color: white;
-  border-radius: 6px;
-  padding: 10px;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-.detail-main .main-wrap .main .comment .empty {
-  margin-top: 10px;
-}
-.detail-main .main-wrap .main .comment .label {
-  font-size: 14px;
-  border-bottom: 1px solid #eeeeee;
-  padding: 0 0 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.detail-main .main-wrap .main .comment .label .total {
-  font-size: 12px;
-  color: #ccc;
-}
-.detail-main .main-wrap .main .comment .comment-list {
-  margin-top: 16px;
-  padding: 0 10px;
-  box-sizing: border-box;
-}
-.detail-main .main-wrap .main .comment .comment-list .comment-item {
-  margin-bottom: 20px;
-  display: flex;
-}
-.detail-main .main-wrap .main .comment .comment-list .comment-item .avatar-img {
-  margin-right: 6px;
-}
-.detail-main .main-wrap .main .comment .comment-list .comment-item .message-wrap {
-  flex: 1;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #eeeeee;
-}
-.detail-main .main-wrap .main .comment .comment-list .comment-item .message-wrap .name-time {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  color: #999999;
-}
-.detail-main .main-wrap .main .comment .comment-list .comment-item .message-wrap .message-content {
-  margin-top: 20px;
-  color: #333;
-  font-size: 14px;
-}
-.detail-main .main-wrap .main .comment .comment-list .loadmore {
-  display: flex;
-  justify-content: center;
-}
 .detail-main .footer {
   display: flex;
   justify-content: space-between;
@@ -137,6 +81,9 @@
   justify-content: center;
   align-items: center;
   color: white;
+}
+.detail-main .footer .button.disable {
+  opacity: 0.5;
 }
 .detail-main .button-group {
   position: fixed;

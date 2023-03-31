@@ -1,6 +1,6 @@
 <template>
 	<view class="select-warp">
-		<view class="options" v-if="!isRead">
+		<view class="options" v-if="options.length">
 			<view class="tip">
 				<i class="iconfont icon-cankaodaan"></i> 问题选项
 			</view>
@@ -14,14 +14,29 @@
 						{{ item.text }}
 					</view>
 				</view>
-				<view class="correct">
-					正确答案：<text class="correct-tip">{{ correct }}</text>
-				</view>
 			</view>
+
+			<!-- 正确答案 -->
+			<fui-collapse class="correct-collapse">
+				<fui-collapse-item>
+					<view class="fui-item__box">
+						<i class="iconfont icon-cankaodaan"></i>
+						<text class="title">查看答案</text>
+					</view>
+					<template v-slot:content>
+					<view class="slot-content">
+						<view class="correct">
+							正确答案：<text class="correct-tip">{{ correct }}</text>
+						</view>
+					</view>
+				</template>
+				</fui-collapse-item>
+			</fui-collapse>
 		</view>
-		<!-- 选项答案 -->
-		<fui-collapse v-if="isRead" >
-			<fui-collapse-item :open="isRead">
+
+		<!-- 答案解析 -->
+		<fui-collapse v-if="answer" >
+			<fui-collapse-item :open="true">
 				<view class="fui-item__box">
 					<i class="iconfont icon-cankaodaan"></i>
 					<text class="title">问题解析</text>
@@ -60,11 +75,6 @@
 			type: {
 				type: Number,
 				default: LEARNING_TYPE.VIEW
-			},
-			// 查看类型
-			isRead: {
-				type: Boolean,
-				default: true
 			}
 		},
 		data() {
@@ -86,7 +96,7 @@
 				});
 			},
 			correct({ data }) {
-				return data.correct || '暂无答案'
+				return data.correct;
 			}
 		},
 		methods: {
@@ -116,8 +126,13 @@
 				.checkbox-item + .checkbox-item {
 					margin-top: 16px;
 				}
+			}
+			.correct-collapse {
+				.label {
+					padding: 10px 0;
+				}
 				.correct {
-					margin: 10px 0 0;
+					margin: 20px 0 0;
 					&-tip {
 						color: #5b85f7;
 					}

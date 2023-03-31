@@ -29,7 +29,9 @@ const CHECK_TYPE = {
   // 查看
   READ: 0,
   // 考试
-  TEST: 1
+  TEST: 1,
+  // 完整
+  ALL: 2
 };
 exports.BASEURL = BASEURL;
 exports.CHECK_TYPE = CHECK_TYPE;

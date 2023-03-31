@@ -5,6 +5,8 @@ const store_index = require("./store/index.js");
 require("./constans/index.js");
 require("./api/user.js");
 require("./api/base.js");
+require("./store/modules/topic.js");
+require("./api/topic.js");
 if (!Math) {
   "./pages/index/index.js";
   "./pages/user/index.js";

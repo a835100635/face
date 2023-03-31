@@ -7487,6 +7487,7 @@ exports.index = index;
 exports.n = n;
 exports.o = o;
 exports.p = p;
+exports.reactive = reactive;
 exports.ref = ref;
 exports.resolveComponent = resolveComponent;
 exports.s = s;

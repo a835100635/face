@@ -42,5 +42,7 @@ export const CHECK_TYPE = {
 	// 查看
 	READ: 0,
 	// 考试
-	TEST: 1
+	TEST: 1,
+	// 完整
+	ALL: 2
 }

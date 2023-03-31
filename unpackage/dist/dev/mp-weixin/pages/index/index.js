@@ -5,6 +5,8 @@ require("../../api/base.js");
 require("../../store/index.js");
 require("../../constans/index.js");
 require("../../api/user.js");
+require("../../store/modules/topic.js");
+require("../../api/topic.js");
 const _sfc_main = {
   __name: "index",
   setup(__props) {

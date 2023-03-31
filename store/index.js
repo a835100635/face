@@ -5,6 +5,8 @@ import {
 import { TOKEN_NAME, HAS_LOGIN_NAME, USER_INFO_NAME } from '../constans/index.js';
 import { login, getLoginUser, updataUserInfo } from '../api/user.js';
 
+import topic from './modules/topic.js';
+
 const store = createStore({
 	//存放状态
 	state: {
@@ -82,6 +84,10 @@ const store = createStore({
 				}
 			})
 		}
+	},
+	modules: {
+		// 题目模块
+		topic: topic, 
 	}
 })
 export default store

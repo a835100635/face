@@ -1,6 +1,6 @@
 {
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "loading": "../../components/loading"
+    "fui-loading": "../../components/firstui/fui-loading/fui-loading"
   }
 }

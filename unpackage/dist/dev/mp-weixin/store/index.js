@@ -2,6 +2,7 @@
 const common_vendor = require("../common/vendor.js");
 const constans_index = require("../constans/index.js");
 const api_user = require("../api/user.js");
+const store_modules_topic = require("./modules/topic.js");
 const store = common_vendor.createStore({
   //存放状态
   state: {
@@ -76,6 +77,10 @@ const store = common_vendor.createStore({
         }
       });
     }
+  },
+  modules: {
+    // 题目模块
+    topic: store_modules_topic.topic
   }
 });
 exports.store = store;
