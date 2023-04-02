@@ -92,9 +92,6 @@
   display: flex;
   flex-direction: column;
 }
-.detail-main .button-group .iconfont {
-  font-size: 12px;
-}
 .detail-main .button-group .iconfont .fui-icon {
   color: #ccc !important;
 }

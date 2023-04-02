@@ -28,9 +28,9 @@
 		</view>
 		<!-- 点赞、点踩 -->
 		<view class="button-group">
-			<fui-icon class="iconfont" name="fabulous-fill"></fui-icon>
+			<fui-icon class="iconfont" name="fabulous-fill" :size="44"></fui-icon>
 			<fui-text class="text" :text="data.like" :size="24"></fui-text>
-			<fui-icon class="iconfont" name="stepon-fill"></fui-icon>
+			<fui-icon class="iconfont" name="stepon-fill" :size="44"></fui-icon>
 			<fui-text class="text" :text="data.dislike" :size="24"></fui-text>
 		</view>
 		<!-- loading -->
@@ -43,26 +43,23 @@ import { getTopicDetail } from '@/api/topic.js';
 import SelectComponent from './components/select.vue';
 import { TOPIC_TYPE, LEARNING_TYPE, CHECK_TYPE } from '@/constans/index.js';
 
-import fuiAvatar from "@/components/firstui/fui-avatar/fui-avatar.vue"
-import fuiIcon from "@/components/firstui/fui-icon/fui-icon.vue"
 import fuiLoadmore from "@/components/firstui/fui-loadmore/fui-loadmore.vue"
 import fuiButton from "@/components/firstui/fui-button/fui-button.vue"
 import fuiLoading from "@/components/firstui/fui-loading/fui-loading.vue"
 import fuiText from "@/components/firstui/fui-text/fui-text.vue"
 import comment from '@/components/comment.vue';
-
+import fuiIcon from "@/components/firstui/fui-icon/fui-icon.vue"
 
 import { useStore } from 'vuex';
 export default {
 	components: {
 		SelectComponent,
-		fuiAvatar,
-		fuiIcon,
 		fuiLoadmore,
 		fuiButton,
 		fuiLoading,
 		fuiText,
-		comment
+		comment,
+		fuiIcon
 	},
 	onLoad(e) {
 		uni.setNavigationBarTitle({
@@ -76,31 +73,6 @@ export default {
 		return {
 			options: null,
 			data: {},
-			commentData: {
-				total: 0,
-				data: [
-					// {
-					// 	usrename: '用户1',
-					// 	message: '答案运改这样',
-					// 	createTime: '2023-03-20 12:00:00',
-					// 	like: 100,
-					// 	dislike: 10,
-					// 	id: 0,
-					// 	avatar: null,
-					// 	nickname: 'oao'
-					// },
-					// {
-					// 	usrename: '用户1',
-					// 	message: '答案运改这样',
-					// 	createTime: '2023-03-20 12:00:00',
-					// 	like: 100,
-					// 	dislike: 10,
-					// 	id: 1,
-					// 	avatar: null,
-					// 	nickname: '阿斯顿'
-					// },
-				]
-			},
 			fetchLoading: false,
 			loadingText: '加载中...',
 			store: useStore()
@@ -112,10 +84,6 @@ export default {
 			const { type } = data;
 			const { SELECT, JUDGE } = TOPIC_TYPE;
 			return [SELECT, JUDGE].includes(type);
-		},
-		isShowLoadmoreBtn({ commentData }) {
-			const { data, total } = commentData;
-			return data.length < total;
 		},
 		isDisablePre({ currentIndex }) {
 			return currentIndex == 1;
@@ -156,7 +124,7 @@ export default {
 				this.fetchLoading = true;
 				this.loadingText = '加载中...'
 				const result = await getTopicDetail({
-					checkType: 1,
+					checkType: 0,
 					topicId: id
 				});
 				this.data = result;
@@ -286,7 +254,6 @@ export default {
 		display: flex;
 		flex-direction: column;
 		.iconfont {
-			font-size: 12px;
 			.fui-icon {
 				color: #ccc !important;
 			}

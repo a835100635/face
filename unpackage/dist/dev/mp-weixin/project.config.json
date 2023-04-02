@@ -17,8 +17,7 @@
       "outputPath": ""
     },
     "condition": false,
-    "ignoreUploadUnusedFiles": true,
-    "ignoreDevUnusedFiles": false
+    "ignoreUploadUnusedFiles": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.25.3",

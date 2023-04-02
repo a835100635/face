@@ -7,23 +7,21 @@ require("../../store/index.js");
 require("../../api/user.js");
 require("../../store/modules/topic.js");
 const SelectComponent = () => "./components/select.js";
-const fuiAvatar = () => "../../components/firstui/fui-avatar/fui-avatar.js";
-const fuiIcon = () => "../../components/firstui/fui-icon/fui-icon.js";
 const fuiLoadmore = () => "../../components/firstui/fui-loadmore/fui-loadmore.js";
 const fuiButton = () => "../../components/firstui/fui-button/fui-button.js";
 const fuiLoading = () => "../../components/firstui/fui-loading/fui-loading.js";
 const fuiText = () => "../../components/firstui/fui-text/fui-text.js";
 const comment = () => "../../components/comment.js";
+const fuiIcon = () => "../../components/firstui/fui-icon/fui-icon.js";
 const _sfc_main = {
   components: {
     SelectComponent,
-    fuiAvatar,
-    fuiIcon,
     fuiLoadmore,
     fuiButton,
     fuiLoading,
     fuiText,
-    comment
+    comment,
+    fuiIcon
   },
   onLoad(e) {
     common_vendor.index.setNavigationBarTitle({
@@ -36,31 +34,6 @@ const _sfc_main = {
     return {
       options: null,
       data: {},
-      commentData: {
-        total: 0,
-        data: [
-          // {
-          // 	usrename: '用户1',
-          // 	message: '答案运改这样',
-          // 	createTime: '2023-03-20 12:00:00',
-          // 	like: 100,
-          // 	dislike: 10,
-          // 	id: 0,
-          // 	avatar: null,
-          // 	nickname: 'oao'
-          // },
-          // {
-          // 	usrename: '用户1',
-          // 	message: '答案运改这样',
-          // 	createTime: '2023-03-20 12:00:00',
-          // 	like: 100,
-          // 	dislike: 10,
-          // 	id: 1,
-          // 	avatar: null,
-          // 	nickname: '阿斯顿'
-          // },
-        ]
-      },
       fetchLoading: false,
       loadingText: "加载中...",
       store: common_vendor.useStore()
@@ -72,10 +45,6 @@ const _sfc_main = {
       const { type } = data;
       const { SELECT, JUDGE } = constans_index.TOPIC_TYPE;
       return [SELECT, JUDGE].includes(type);
-    },
-    isShowLoadmoreBtn({ commentData }) {
-      const { data, total } = commentData;
-      return data.length < total;
     },
     isDisablePre({ currentIndex }) {
       return currentIndex == 1;
@@ -116,7 +85,7 @@ const _sfc_main = {
         this.fetchLoading = true;
         this.loadingText = "加载中...";
         const result = await api_topic.getTopicDetail({
-          checkType: 1,
+          checkType: 0,
           topicId: id
         });
         this.data = result;
@@ -191,14 +160,16 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     f: common_vendor.o((...args) => $options.goNext && $options.goNext(...args)),
     g: common_vendor.n($options.isDisableNext && "disable"),
     h: common_vendor.p({
-      name: "fabulous-fill"
+      name: "fabulous-fill",
+      size: 44
     }),
     i: common_vendor.p({
       text: $data.data.like,
       size: 24
     }),
     j: common_vendor.p({
-      name: "stepon-fill"
+      name: "stepon-fill",
+      size: 44
     }),
     k: common_vendor.p({
       text: $data.data.dislike,
