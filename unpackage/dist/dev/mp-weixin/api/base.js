@@ -6,7 +6,7 @@ const headerConfig = () => {
   return {
     "X-ProductName": "Face",
     "content-type": "application/x-www-form-urlencoded",
-    "X-Auth-Token": store_index.store.getters.accessToken
+    "X-Face-Token": store_index.store.getters.accessToken
   };
 };
 const get = (url, data, config = {}) => {

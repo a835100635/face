@@ -5,7 +5,7 @@ const headerConfig = () => {
 	return {
 		'X-ProductName': 'Face',
 		'content-type': 'application/x-www-form-urlencoded',
-		'X-Auth-Token': store.getters.accessToken
+		'X-Face-Token': store.getters.accessToken
 	}
 }
 

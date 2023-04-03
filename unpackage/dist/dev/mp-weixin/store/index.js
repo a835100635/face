@@ -8,9 +8,7 @@ const store = common_vendor.createStore({
   state: {
     // 登录状态
     isLogin: false,
-    userInfo: {
-      name: "2"
-    },
+    userInfo: {},
     accessToken: void 0
   },
   getters: {
@@ -44,38 +42,43 @@ const store = common_vendor.createStore({
      * @param {Object} state
      * @param {Object} params
      */
-    loginAction({ commit }, params) {
+    async loginAction({ commit }, params) {
       const {
-        provider = "weixin"
+        provider = "weixin",
+        userInfo
       } = params;
-      common_vendor.index.login({
-        provider,
-        success: (loginRes) => {
-          const { code } = loginRes;
-          api_user.login({ code }).then((r) => {
-            commit("setAccessToken", r.accessToken);
-            common_vendor.index.setStorage({ key: constans_index.TOKEN_NAME, data: r.accessToken });
-            api_user.getLoginUser().then((res) => {
-              commit("setLoginStatus", true);
-              commit("setUserInfo", res);
-              const { gender, avatarUrl, city, country, province, nickName } = params.userInfo;
-              api_user.updataUserInfo({
-                nickName,
-                avatarUrl,
-                city,
-                country,
-                province,
-                sex: gender
-              }).then((user) => {
-                console.log("user", user);
-                commit("setUserInfo", user);
-                common_vendor.index.setStorage({ key: constans_index.HAS_LOGIN_NAME, data: true });
-                common_vendor.index.setStorage({ key: constans_index.USER_INFO_NAME, data: user });
-              });
-            });
-          });
-        }
-      });
+      try {
+        const uniLogin = await common_vendor.index.login({ provider });
+        const loginData = await api_user.login({ code: uniLogin.code });
+        const { token } = loginData;
+        commit("setAccessToken", token);
+        common_vendor.index.setStorage({ key: constans_index.TOKEN_NAME, data: token });
+        const { gender, avatarUrl, city, country, province, nickName } = userInfo;
+        const newUserInfo = await api_user.updateUserInfo({
+          nickName,
+          avatarUrl,
+          city,
+          country,
+          province,
+          gender
+        });
+        commit("setUserInfo", newUserInfo);
+        commit("setLoginStatus", true);
+        common_vendor.index.setStorage({ key: constans_index.HAS_LOGIN_NAME, data: true });
+        common_vendor.index.setStorage({ key: constans_index.USER_INFO_NAME, data: newUserInfo });
+        common_vendor.index.showToast({
+          title: "登录成功",
+          icon: "success",
+          duration: 1e3
+        });
+      } catch (error) {
+        console.log("-登录失败", error);
+        common_vendor.index.showToast({
+          title: "登录失败",
+          icon: "error",
+          duration: 2e3
+        });
+      }
     }
   },
   modules: {
