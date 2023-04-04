@@ -9,18 +9,33 @@ const headerConfig = () => {
     "X-Face-Token": store_index.store.getters.accessToken
   };
 };
-const get = (url, data, config = {}) => {
+const request = (method, url, data, config = {}) => {
   return new Promise((resolve, reject) => {
     common_vendor.index.request({
       url: `${constans_index.BASEURL}${url}`,
       data,
-      method: "GET",
+      method,
       header: {
         ...headerConfig(),
         ...config
       },
       success: (res) => {
+        const { statusCode } = res;
         const { code, data: data2 } = res.data;
+        if (statusCode === 401) {
+          common_vendor.index.showToast({
+            title: "请先登录",
+            icon: "error",
+            duration: 2e3
+          });
+          reject(data2 || res.data);
+          setTimeout(() => {
+            common_vendor.index.switchTab({
+              url: `/pages/user/index`
+            });
+          }, 2e3);
+          return;
+        }
         if (code === constans_index.HTTP_STATUS.SUCCESS) {
           resolve(data2);
         } else {
@@ -33,29 +48,11 @@ const get = (url, data, config = {}) => {
     });
   });
 };
-const post = (url, data, config = {}) => {
-  return new Promise((resolve, reject) => {
-    common_vendor.index.request({
-      url: `${constans_index.BASEURL}${url}`,
-      data,
-      method: "POST",
-      header: {
-        ...headerConfig(),
-        ...config
-      },
-      success: (res) => {
-        const { code, data: data2 } = res.data;
-        if (code === constans_index.HTTP_STATUS.SUCCESS) {
-          resolve(data2);
-        } else {
-          reject(data2 || res.data);
-        }
-      },
-      fail: (msg) => {
-        reject(msg);
-      }
-    });
-  });
+const get = async (url, data, config = {}) => {
+  return await request("GET", url, data, config);
+};
+const post = async (url, data, config = {}) => {
+  return await request("POST", url, data, config);
 };
 exports.get = get;
 exports.post = post;

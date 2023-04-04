@@ -28,10 +28,22 @@
 		</view>
 		<!-- 点赞、点踩 -->
 		<view class="button-group">
-			<fui-icon class="iconfont" name="fabulous-fill" :size="44"></fui-icon>
-			<fui-text class="text" :text="data.like" :size="24"></fui-text>
-			<fui-icon class="iconfont" name="stepon-fill" :size="44"></fui-icon>
-			<fui-text class="text" :text="data.dislike" :size="24"></fui-text>
+			<fui-icon 
+				class="iconfont" 
+				name="fabulous-fill" 
+				:size="44" 
+				:color="data.isLike ? '#ecc180': '#ccc'"
+				@click="likeStatusAction(LIKE_STATUS.LIKE)">
+			</fui-icon>
+			<text class="text">{{ data.likeCount || 0 }}</text>
+			<fui-icon 
+				class="iconfont" 
+				name="stepon-fill" 
+				:size="44" 
+				:color="data.isDislike ? '#ecc180': '#ccc'"
+				@click="likeStatusAction(LIKE_STATUS.DISLIKE)">
+			</fui-icon>
+			<text class="text">{{ data.dislikeCount || 0 }}</text>
 		</view>
 		<!-- loading -->
 		<fui-loading type="col" v-show="fetchLoading" :text="loadingText"></fui-loading>
@@ -39,9 +51,9 @@
 </template>
 
 <script>
-import { getTopicDetail } from '@/api/topic.js';
+import { getTopicDetail, changeLikeStatus, unlikeStatus } from '@/api/topic.js';
 import SelectComponent from './components/select.vue';
-import { TOPIC_TYPE, LEARNING_TYPE, CHECK_TYPE } from '@/constans/index.js';
+import { TOPIC_TYPE, CHECK_TYPE, LIKE_STATUS, LIKE_TYPE } from '@/constans/index.js';
 
 import fuiLoadmore from "@/components/firstui/fui-loadmore/fui-loadmore.vue"
 import fuiButton from "@/components/firstui/fui-button/fui-button.vue"
@@ -75,7 +87,8 @@ export default {
 			data: {},
 			fetchLoading: false,
 			loadingText: '加载中...',
-			store: useStore()
+			store: useStore(),
+			LIKE_STATUS
 		}
 	},
 	computed: {
@@ -140,7 +153,6 @@ export default {
 				
 			}
 		},
-
 		// 上一题
 		goPrev() {
 			if (this.isDisablePre) return;
@@ -178,6 +190,33 @@ export default {
 				topic
 			});
 			this.fetchData();
+		},
+		// 点赞状态的修改
+		async likeStatusAction(status) {
+			const { LIKE, DISLIKE } = LIKE_STATUS;
+			const { isLike, isDislike } = this.data;
+			// 点击已点赞或点踩 则删除
+			if((status === LIKE && isLike) || (status === DISLIKE && isDislike)) {
+				await unlikeStatus({
+					type: LIKE_TYPE.TOPIC,
+					topicId: this.data.id,
+				})
+				this.fetchData();
+				return
+			}
+			changeLikeStatus({
+				type: LIKE_TYPE.TOPIC,
+				topicId: this.data.id,
+				status
+			}).then(() => {
+				this.fetchData();
+			}).catch((error) => {
+				uni.showToast({
+					title: '操作失败',
+					icon: 'error',
+					duration: 2000
+				})
+			})
 		}
 	}
 }
@@ -253,17 +292,13 @@ export default {
 		bottom: 90px;
 		display: flex;
 		flex-direction: column;
-		.iconfont {
-			.fui-icon {
-				color: #ccc !important;
-			}
-		}
 		.iconfont + .iconfont {
 			margin-top: 8px;
 		}
 		.text {
-			margin-top: -10px;
+			font-size: 12px;
 			text-align: center;
+			color: #ccc;
 		}
 	}
 }

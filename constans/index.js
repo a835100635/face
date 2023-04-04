@@ -46,3 +46,17 @@ export const CHECK_TYPE = {
 	// 完整
 	ALL: 2
 }
+
+// 点赞状态
+export const LIKE_STATUS = {
+	LIKE: 'LIKE',
+	DISLIKE: 'DISLIKE'
+}
+
+// 点赞类型
+export const LIKE_TYPE = {
+	// 题目
+	TOPIC: 'topic',
+	// 评论
+	COMMENT: 'comment'
+}
