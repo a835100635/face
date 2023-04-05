@@ -2,8 +2,15 @@
 import {
 	createStore
 } from 'vuex'
-import { TOKEN_NAME, HAS_LOGIN_NAME, USER_INFO_NAME } from '../constans/index.js';
-import { login, getLoginUser, updataUserInfo } from '../api/user.js';
+import {
+	TOKEN_NAME,
+	HAS_LOGIN_NAME,
+	USER_INFO_NAME
+} from '../constans/index.js';
+import {
+	login,
+	updateUserInfo
+} from '../api/user.js';
 
 import topic from './modules/topic.js';
 
@@ -12,9 +19,7 @@ const store = createStore({
 	state: {
 		// 登录状态
 		isLogin: false,
-		userInfo: {
-			name: '2'
-		},
+		userInfo: {},
 		accessToken: undefined
 	},
 	getters: {
@@ -48,46 +53,54 @@ const store = createStore({
 		 * @param {Object} state
 		 * @param {Object} params
 		 */
-		loginAction({ commit }, params) {
+		async loginAction({ commit }, params) {
 			const {
-				provider = 'weixin'
+				provider = 'weixin',
+				userInfo
 			} = params;
-			uni.login({
-				provider,
-				success: (loginRes) => {
-					const { code } = loginRes;
-					// 执行登录
-					login({ code }).then((r) => {
-						commit('setAccessToken', r.accessToken)
-						uni.setStorage({ key: TOKEN_NAME, data: r.accessToken });
-						// 获取用户信息 远程
-						getLoginUser().then((res) => {
-							commit('setLoginStatus', true);
-							commit('setUserInfo', res);
-							// 更新用户库中用户信心
-							const { gender, avatarUrl, city, country, province, nickName } = params.userInfo;
-							updataUserInfo({
-								nickName,
-								avatarUrl,
-								city,
-								country,
-								province,
-								sex: gender,
-							}).then((user) => {
-								console.log('user', user)
-								commit('setUserInfo', user);
-								uni.setStorage({key: HAS_LOGIN_NAME, data: true});
-								uni.setStorage({key: USER_INFO_NAME, data: user});
-							})
-						})
-					});
-				}
-			})
-		}
+			try {
+				// 获取code
+				const uniLogin = await uni.login({ provider });
+				// 获取openid
+				const loginData = await login({ code: uniLogin.code });
+				const { token } = loginData;
+				commit('setAccessToken', token);
+				// 缓存本地openid
+				uni.setStorage({ key: TOKEN_NAME, data: token });
+				// 更新用户信息
+				const { gender, avatarUrl, city, country, province, nickName } = userInfo;
+				const newUserInfo = await	updateUserInfo({
+					nickName,
+					avatarUrl,
+					city,
+					country,
+					province,
+					gender,
+				});
+				commit('setUserInfo', newUserInfo);
+				commit('setLoginStatus', true);
+				uni.setStorage({key: HAS_LOGIN_NAME, data: true});
+				uni.setStorage({key: USER_INFO_NAME, data: newUserInfo});
+
+				uni.showToast({
+					title: '登录成功',
+					icon: 'success',
+					duration: 1000
+				})
+			} catch (error) {
+				console.log('-登录失败', error)
+				uni.showToast({
+					title: '登录失败',
+					icon: 'error',
+					duration: 2000
+				})
+			}
+
+		},
 	},
 	modules: {
 		// 题目模块
-		topic: topic, 
+		topic: topic,
 	}
 })
 export default store

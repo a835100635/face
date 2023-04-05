@@ -160,6 +160,7 @@ export default {
 <script setup>
 import emptyImg from "@/assets/images/empty.png";
 import { ref, reactive, computed } from "vue";
+
 const commentData = reactive({
   total: 0,
   data: [

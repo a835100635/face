@@ -33,11 +33,23 @@ const CHECK_TYPE = {
   // 完整
   ALL: 2
 };
+const LIKE_STATUS = {
+  LIKE: "LIKE",
+  DISLIKE: "DISLIKE"
+};
+const LIKE_TYPE = {
+  // 题目
+  TOPIC: "topic",
+  // 评论
+  COMMENT: "comment"
+};
 exports.BASEURL = BASEURL;
 exports.CHECK_TYPE = CHECK_TYPE;
 exports.HAS_LOGIN_NAME = HAS_LOGIN_NAME;
 exports.HTTP_STATUS = HTTP_STATUS;
 exports.LEARNING_TYPE = LEARNING_TYPE;
+exports.LIKE_STATUS = LIKE_STATUS;
+exports.LIKE_TYPE = LIKE_TYPE;
 exports.TOKEN_NAME = TOKEN_NAME;
 exports.TOPIC_TYPE = TOPIC_TYPE;
 exports.USER_INFO_NAME = USER_INFO_NAME;

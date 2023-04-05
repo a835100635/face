@@ -36,7 +36,8 @@ const _sfc_main = {
       data: {},
       fetchLoading: false,
       loadingText: "加载中...",
-      store: common_vendor.useStore()
+      store: common_vendor.useStore(),
+      LIKE_STATUS: constans_index.LIKE_STATUS
     };
   },
   computed: {
@@ -137,6 +138,32 @@ const _sfc_main = {
         topic
       });
       this.fetchData();
+    },
+    // 点赞状态的修改
+    async likeStatusAction(status) {
+      const { LIKE, DISLIKE } = constans_index.LIKE_STATUS;
+      const { isLike, isDislike } = this.data;
+      if (status === LIKE && isLike || status === DISLIKE && isDislike) {
+        await api_topic.unlikeStatus({
+          type: constans_index.LIKE_TYPE.TOPIC,
+          topicId: this.data.id
+        });
+        this.fetchData();
+        return;
+      }
+      api_topic.changeLikeStatus({
+        type: constans_index.LIKE_TYPE.TOPIC,
+        topicId: this.data.id,
+        status
+      }).then(() => {
+        this.fetchData();
+      }).catch((error) => {
+        common_vendor.index.showToast({
+          title: "操作失败",
+          icon: "error",
+          duration: 2e3
+        });
+      });
     }
   }
 };
@@ -144,9 +171,8 @@ if (!Array) {
   const _component_select_component = common_vendor.resolveComponent("select-component");
   const _component_comment = common_vendor.resolveComponent("comment");
   const _component_fui_icon = common_vendor.resolveComponent("fui-icon");
-  const _component_fui_text = common_vendor.resolveComponent("fui-text");
   const _component_fui_loading = common_vendor.resolveComponent("fui-loading");
-  (_component_select_component + _component_comment + _component_fui_icon + _component_fui_text + _component_fui_loading)();
+  (_component_select_component + _component_comment + _component_fui_icon + _component_fui_loading)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
@@ -159,24 +185,22 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     e: common_vendor.n($options.isDisablePre && "disable"),
     f: common_vendor.o((...args) => $options.goNext && $options.goNext(...args)),
     g: common_vendor.n($options.isDisableNext && "disable"),
-    h: common_vendor.p({
-      name: "fabulous-fill",
-      size: 44
-    }),
+    h: common_vendor.o(($event) => $options.likeStatusAction($data.LIKE_STATUS.LIKE)),
     i: common_vendor.p({
-      text: $data.data.like,
-      size: 24
+      name: "fabulous-fill",
+      size: 44,
+      color: $data.data.isLike ? "#ecc180" : "#ccc"
     }),
-    j: common_vendor.p({
+    j: common_vendor.t($data.data.likeCount || 0),
+    k: common_vendor.o(($event) => $options.likeStatusAction($data.LIKE_STATUS.DISLIKE)),
+    l: common_vendor.p({
       name: "stepon-fill",
-      size: 44
+      size: 44,
+      color: $data.data.isDislike ? "#ecc180" : "#ccc"
     }),
-    k: common_vendor.p({
-      text: $data.data.dislike,
-      size: 24
-    }),
-    l: $data.fetchLoading,
-    m: common_vendor.p({
+    m: common_vendor.t($data.data.dislikeCount || 0),
+    n: $data.fetchLoading,
+    o: common_vendor.p({
       type: "col",
       text: $data.loadingText
     })

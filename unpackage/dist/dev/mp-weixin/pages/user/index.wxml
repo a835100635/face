@@ -1,1 +1,1 @@
-<view class="user-main"><button bindtap="{{a}}">获取dd</button></view>
+<view class="user-main"><image src="{{a}}" alt="" srcset=""></image> {{b}} <button bindtap="{{c}}">获取dd</button></view>

@@ -4,7 +4,6 @@
   "usingComponents": {
     "select-component": "./components/select",
     "fui-loading": "../../components/firstui/fui-loading/fui-loading",
-    "fui-text": "../../components/firstui/fui-text/fui-text",
     "comment": "../../components/comment",
     "fui-icon": "../../components/firstui/fui-icon/fui-icon"
   }
