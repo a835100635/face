@@ -11,16 +11,12 @@
 			@refresherrefresh="onRefresh"
 			@refresherrestore="onRestore"
 		>
-			<!-- 轮播图 -->
-			<view class="swiper-main">
-				<swiper class="swiper" indicator-dots circular=true duration="400">
-					<swiper-item class="swiper-item" v-for="(item, index) in carouselList" :key="item.type"  @click="navTo(item)">
-						<view class="image-wrapper">
-							<image :src="item.image" class="loaded"	mode="aspectFill"></image>
-						</view>
-					</swiper-item>
-				</swiper>
-			</view>
+			<image src="../../assets/images/banner2.png" class="banner"	mode="aspectFill"></image>
+
+<uni-badge text="1"></uni-badge>
+<uni-badge text="2" type="success"></uni-badge>
+<uni-badge text="3" type="primary" :inverted="true"></uni-badge>
+
 			<!-- 提示 -->
 			<view class="prompt">
 				2023-2-20 新增Vue3 10道面试题
@@ -28,36 +24,36 @@
 			<!-- 分类选择 -->
 			<view class="category-main">
 				<view class="category-item" v-for="(item, index) in category" :key="index">
-					<view class="title">{{ item.label }}</view>
-					<view class="item-wrap">
-						<view class="item" v-for="(child, child_index) in item.child" :key="child.categoryId"  @click="handleSelect(item, child)">
+					<!-- <view class="title">{{ item.label }}</view> -->
+					<fui-row>
+						<fui-col :span="12" 
+							v-for="(child, child_index) in item.child" 
+							:key="child.categoryId"  
+							@click="handleSelect(item, child)">
 							<view class="content">
 								<i :class="`iconfont ${child.icon}`" />
 								<view class="title">{{ child.categoryName }}</view>
-								<!-- <view class="count">{{ child.count }}</view> -->
+								<view class="count">{{ child.count }}</view>
 							</view>
-						</view>
-					</view>
+						</fui-col>
+					</fui-row>
 				</view>
 			</view>
 		</scroll-view>
 	</view>
 </template>
 
+
 <script setup>
+import fuiRow from "@/components/firstui/fui-row/fui-row.vue"
+import fuiCol from "@/components/firstui/fui-col/fui-col.vue"
 import { getCategory } from '@/api/category.js';
 import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
+
+
 // 下拉加载
 const isRefresher = ref(false);
-const carouselList = ref([
-	{
-		image: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-	},
-	{
-		image: 'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg',
-	},
-]);
 
 const data = ref([
 	{
@@ -118,74 +114,29 @@ const onRestore = (e) => {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.container {
-		background-color: #f6f6f6;
-		height: 100vh;
-		.swiper-main {
-			height: 180px;
-			box-shadow: 0 0px 10px #333;
-			.swiper {
-				height: 100%;
-				.image-wrapper {
-					height: 100%;
-					.loaded {
-						height: 100%;
-						width: 100%;
-						object-fit: cover;
-					}
-				}
-			}
+		background-color: #f5f5f5;
+		min-height: 100vh;
+		
+		.banner {
+			width: 100%;
+			height: 220px;
+			object-fit: cover;
 		}
+
 		.prompt {
 			color: #427df7;
-			margin: 6px 10px;
+			margin: 0 $padding-lt;
 		}
 		.category-main {
 			overflow: hidden;
 			.category-item {
 				overflow: hidden;
-				margin: 0 10px 10px;
-				background-color: #fff;
+				padding: 0 $padding-lt;
 				border-radius: 8px;
 				.title {
-					margin: 10px 0 0 10px;
-				}
-				.item-wrap {
-					display: flex;
-					flex-wrap: wrap;
-					.item {
-						display: flex;
-						justify-content: center;
-						align-items: center;
-						width: calc(100%/3);
-						padding: 10px;
-						box-sizing: border-box;
-						.content {
-							display: flex;
-							flex-direction: column;
-							justify-content: center;
-							align-items: center;
-							height: 100px;
-							width: 100px;
-							border-radius: 10px;
-							box-shadow: 0px 0px 6px #dcdcdc;
-							.title {
-								font-size: 14px;
-								margin: 6px 0;
-							}
-							.iconfont {
-								font-size: 24px;
-							}
-							.count {
-								font-size: 12px;
-								padding: 0 10px;
-								border-radius: 5px;
-								background-color: #cadbfc;
-								color: #427df7;
-							}
-						}
-					}
+					margin: 10px 0 0 0;
 				}
 			}
 		}
