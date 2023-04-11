@@ -1,20 +1,19 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const common_assets = require("../../common/assets.js");
-const api_category = require("../../api/category.js");
-require("../../api/base.js");
 require("../../store/index.js");
 require("../../constans/index.js");
 require("../../api/user.js");
+require("../../api/base.js");
 require("../../store/modules/topic.js");
 require("../../api/topic.js");
 if (!Array) {
-  const _easycom_uni_badge2 = common_vendor.resolveComponent("uni-badge");
-  _easycom_uni_badge2();
+  const _easycom_uni_notice_bar2 = common_vendor.resolveComponent("uni-notice-bar");
+  _easycom_uni_notice_bar2();
 }
-const _easycom_uni_badge = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-badge/uni-badge.js";
+const _easycom_uni_notice_bar = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-notice-bar/uni-notice-bar.js";
 if (!Math) {
-  (_easycom_uni_badge + fuiCol + fuiRow)();
+  (_easycom_uni_notice_bar + fuiCol + fuiRow)();
 }
 const fuiRow = () => "../../components/firstui/fui-row/fui-row.js";
 const fuiCol = () => "../../components/firstui/fui-col/fui-col.js";
@@ -22,11 +21,30 @@ const _sfc_main = {
   __name: "index",
   setup(__props) {
     const isRefresher = common_vendor.ref(false);
+    const noticeText = common_vendor.ref(
+      "[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"
+    );
     const data = common_vendor.ref([
       {
         label: "前端",
         type: 0,
-        child: []
+        child: [
+          {
+            categoryName: "asd",
+            categoryId: 1,
+            count: 100
+          },
+          {
+            categoryName: "asdzfv",
+            categoryId: 2,
+            count: 100
+          },
+          {
+            categoryName: "asdzfv",
+            categoryId: 2,
+            count: 100
+          }
+        ]
       },
       {
         label: "后端",
@@ -34,14 +52,6 @@ const _sfc_main = {
         child: []
       }
     ]);
-    const categoryList = async () => {
-      const result = await api_category.getCategory();
-      Object.keys(result).forEach((key) => {
-        const _ = data.value.find((i) => i.type == key);
-        _.child = result[key];
-      });
-    };
-    categoryList();
     const category = common_vendor.computed(() => {
       return data.value.filter((_) => _.child.length > 1);
     });
@@ -67,43 +77,41 @@ const _sfc_main = {
       return {
         a: common_assets._imports_0,
         b: common_vendor.p({
-          text: "1"
+          scrollable: true,
+          showIcon: true,
+          single: true,
+          speed: "50",
+          color: "rgb(41, 121, 255)",
+          ["background-color"]: "rgb(234, 242, 255)",
+          text: noticeText.value
         }),
-        c: common_vendor.p({
-          text: "2",
-          type: "success"
-        }),
-        d: common_vendor.p({
-          text: "3",
-          type: "primary",
-          inverted: true
-        }),
-        e: common_vendor.f(common_vendor.unref(category), (item, index, i0) => {
+        c: common_vendor.f(common_vendor.unref(category), (item, index, i0) => {
           return {
-            a: common_vendor.f(item.child, (child, child_index, i1) => {
+            a: common_vendor.f(item.child, (child, k1, i1) => {
               return {
                 a: common_vendor.n(`iconfont ${child.icon}`),
                 b: common_vendor.t(child.categoryName),
                 c: common_vendor.t(child.count),
                 d: child.categoryId,
                 e: common_vendor.o(($event) => handleSelect(item, child), child.categoryId),
-                f: "1cf27b2a-4-" + i0 + "-" + i1 + "," + ("1cf27b2a-3-" + i0)
+                f: "1cf27b2a-2-" + i0 + "-" + i1 + "," + ("1cf27b2a-1-" + i0)
               };
             }),
-            b: "1cf27b2a-3-" + i0,
+            b: "1cf27b2a-1-" + i0,
             c: index
           };
         }),
-        f: common_vendor.p({
+        d: common_assets._imports_1,
+        e: common_vendor.p({
           span: 12
         }),
-        g: isRefresher.value,
-        h: common_vendor.o(onPulling),
-        i: common_vendor.o(onRefresh),
-        j: common_vendor.o(onRestore)
+        f: isRefresher.value,
+        g: common_vendor.o(onPulling),
+        h: common_vendor.o(onRefresh),
+        i: common_vendor.o(onRestore)
       };
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "/Users/lichunlin/code/gitHub/face/pages/index/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "I:/face/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

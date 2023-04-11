@@ -1,7 +1,7 @@
 {
   "navigationStyle": "custom",
   "usingComponents": {
-    "uni-badge": "../../node-modules/@dcloudio/uni-ui/lib/uni-badge/uni-badge",
+    "uni-notice-bar": "../../node-modules/@dcloudio/uni-ui/lib/uni-notice-bar/uni-notice-bar",
     "fui-row": "../../components/firstui/fui-row/fui-row",
     "fui-col": "../../components/firstui/fui-col/fui-col"
   }
