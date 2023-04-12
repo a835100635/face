@@ -12,11 +12,21 @@
       @refresherrestore="onRestore"
     >
       <!-- 顶部banner -->
-      <image
-        src="../../assets/images/banner2.png"
-        class="banner"
-        mode="aspectFill"
-      ></image>
+      <view class="banner-wrap">
+        <image
+          src="../../assets/images/banner2.png"
+          class="banner"
+          mode="aspectFill"
+        ></image>
+        <fui-text class="text" text="让面试" :size="60" color="#fff"></fui-text>
+        <fui-text
+          class="text text_next"
+          text="不再是问题"
+          :size="40"
+          color="#fff"
+        ></fui-text>
+      </view>
+
       <!-- 通告栏 -->
       <uni-notice-bar
         scrollable
@@ -41,20 +51,21 @@
               v-for="child in item.child"
               :key="child.categoryId"
               :span="12"
-              @click="handleSelect(item, child)"
             >
-              <view class="col">
-				<view class="item">
-					<image
-						src="../../assets/images/banner.png"
-						class="item-bg"
-					></image>
-					<view class="content">
-						<i :class="`iconfont ${child.icon}`" />
-						<view class="title">{{ child.categoryName }}</view>
-						<view class="count">{{ child.count }}</view>
-					</view>
-				</view>
+              <view class="col" 
+                @click="handleSelect(item, child)">
+                <view class="item">
+                  <view class="content">
+                    <view class="icon-top">
+                      <i :class="`iconfont ${child.icon}`" />
+                    </view>
+                    <view class="content-c">
+                      <view class="count">
+                        <span class="n">{{ child.topicCount }}</span>题</view>
+                      <view class="name">{{ child.categoryName }}</view>
+                    </view>
+                  </view>
+                </view>
               </view>
             </fui-col>
           </fui-row>
@@ -64,13 +75,12 @@
   </view>
 </template>
 
-
 <script setup>
 import fuiRow from "@/components/firstui/fui-row/fui-row.vue";
 import fuiCol from "@/components/firstui/fui-col/fui-col.vue";
+import fuiText from "@/components/firstui/fui-text/fui-text.vue";
 import { getCategory } from "@/api/category.js";
 import { ref, computed } from "vue";
-import { useStore } from "vuex";
 
 // 下拉加载
 const isRefresher = ref(false);
@@ -84,26 +94,40 @@ const data = ref([
     type: 0,
     child: [
       {
-        categoryName: "asd",
-        categoryId: 1,
-        count: 100,
+        id: 1,
+        typeId: 0,
+        categoryName: "Vue",
+        topicCount: 1,
+        icon: 'icon-Vue'
       },
       {
-        categoryName: "asdzfv",
-        categoryId: 2,
-        count: 100,
+        id: 3,
+        typeId: 0,
+        categoryName: "HTML",
+        topicCount: 5,
+        icon: 'icon-html'
       },
-	  {
-        categoryName: "asdzfv",
-        categoryId: 2,
-        count: 100,
+      {
+        id: 4,
+        typeId: 0,
+        categoryName: "CSS",
+        topicCount: 5,
+        icon: 'icon-css'
       },
     ],
   },
   {
     label: "后端",
     type: 1,
-    child: [],
+    child: [
+      {
+        id: 2,
+        typeId: 1,
+        categoryName: "Java",
+        topicCount: 0,
+        icon: 'icon-java'
+      },
+    ],
   },
 ]);
 // 获取分类
@@ -150,47 +174,107 @@ const onRestore = (e) => {
 
 <style lang="scss" scoped>
 .container {
-  background-color: #f5f5f5;
+  background-color: #dfe7ef;
   min-height: 100vh;
 
-  .banner {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
+  .banner-wrap {
+    position: relative;
+    .banner {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .text {
+      position: absolute;
+      top: 90px;
+      right: 30px;
+      color: #fff;
+      font-weight: 600;
+    }
+    .text_next {
+      top: 126px;
+    }
   }
 
   .category-main {
-    overflow: hidden;
     .category-item {
-      overflow: hidden;
       padding: 0 calc($padding-lt - 10px);
       border-radius: 8px;
       .col {
-		  padding: 0 10px 10px;
-		  box-sizing: border-box;
+        padding: 0 10px 10px;
+        box-sizing: border-box;
+        background-color: transparent;
         .item {
-		  position: relative;
-		  border-radius: 10px;
-		  height: 80px;
-		  backdrop-filter: blur(6px);
-		  overflow: hidden;
-		  .content {
-			height: 100%;
-			width: 100%;
-		  	backdrop-filter: blur(10px);
-		  }
-		  .item-bg {
-			height: 100%;
-			width: 100%;
-			object-fit: cover;
-			position: absolute;
-			top: 0;
-			left: 0;
-			z-index: -1;
-		  }
+          position: relative;
+          height: 100px;
+          background-color: #eef3f7;
+          box-shadow: 0px 15px 35px -5px rgba(50, 88, 130, 0.32);
+          border-radius: 15px;
+          .content {
+            height: 100%;
+            width: 100%;
+            color: #454d5a;
+            position: relative;
+            .icon-top {
+              position: absolute;
+              top: -7px;
+              right: 10px;
+              width: 50px;
+              height: 50px;
+              z-index: 2;
+              text-align: center;
+              line-height: 50px;
+                .iconfont {
+                  font-size: 32px;
+                }
+                &::before {
+                  content: "";
+                  position: absolute;
+                  display: block;
+                  width: 100%;
+                  height: 100%;
+                  background-color: white;
+                  box-shadow: 0px 10px 40px 0px rgba(109, 109, 109, 0.5);
+                  z-index: -1;
+                  opacity: 0.9;
+                  border-radius: 15px;
+                }
+            }
+            .content-c {
+              position: absolute;
+              bottom: 10px;
+              left: 10px;
+              .name {
+                font-size: 18px;
+                font-weight: 600;
+              }
+              .count {
+                font-size: 14px;
+                .n {
+                  font-size: 20px;
+                  margin-right: 4px;
+                }
+              }
+            }
+          }
+          .item-bg {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+          }
         }
       }
     }
   }
+}
+</style>
+
+<style lang="scss">
+.fui-row__box {
+  padding-bottom: 50px;
 }
 </style>

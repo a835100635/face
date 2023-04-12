@@ -13,10 +13,11 @@ if (!Array) {
 }
 const _easycom_uni_notice_bar = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-notice-bar/uni-notice-bar.js";
 if (!Math) {
-  (_easycom_uni_notice_bar + fuiCol + fuiRow)();
+  (fuiText + _easycom_uni_notice_bar + fuiCol + fuiRow)();
 }
 const fuiRow = () => "../../components/firstui/fui-row/fui-row.js";
 const fuiCol = () => "../../components/firstui/fui-col/fui-col.js";
+const fuiText = () => "../../components/firstui/fui-text/fui-text.js";
 const _sfc_main = {
   __name: "index",
   setup(__props) {
@@ -30,26 +31,40 @@ const _sfc_main = {
         type: 0,
         child: [
           {
-            categoryName: "asd",
-            categoryId: 1,
-            count: 100
+            id: 1,
+            typeId: 0,
+            categoryName: "Vue",
+            topicCount: 1,
+            icon: "icon-Vue"
           },
           {
-            categoryName: "asdzfv",
-            categoryId: 2,
-            count: 100
+            id: 3,
+            typeId: 0,
+            categoryName: "HTML",
+            topicCount: 5,
+            icon: "icon-html"
           },
           {
-            categoryName: "asdzfv",
-            categoryId: 2,
-            count: 100
+            id: 4,
+            typeId: 0,
+            categoryName: "CSS",
+            topicCount: 5,
+            icon: "icon-css"
           }
         ]
       },
       {
         label: "后端",
         type: 1,
-        child: []
+        child: [
+          {
+            id: 2,
+            typeId: 1,
+            categoryName: "Java",
+            topicCount: 0,
+            icon: "icon-java"
+          }
+        ]
       }
     ]);
     const category = common_vendor.computed(() => {
@@ -77,6 +92,16 @@ const _sfc_main = {
       return {
         a: common_assets._imports_0,
         b: common_vendor.p({
+          text: "让面试",
+          size: 60,
+          color: "#fff"
+        }),
+        c: common_vendor.p({
+          text: "不再是问题",
+          size: 40,
+          color: "#fff"
+        }),
+        d: common_vendor.p({
           scrollable: true,
           showIcon: true,
           single: true,
@@ -85,33 +110,32 @@ const _sfc_main = {
           ["background-color"]: "rgb(234, 242, 255)",
           text: noticeText.value
         }),
-        c: common_vendor.f(common_vendor.unref(category), (item, index, i0) => {
+        e: common_vendor.f(common_vendor.unref(category), (item, index, i0) => {
           return {
             a: common_vendor.f(item.child, (child, k1, i1) => {
               return {
                 a: common_vendor.n(`iconfont ${child.icon}`),
-                b: common_vendor.t(child.categoryName),
-                c: common_vendor.t(child.count),
-                d: child.categoryId,
-                e: common_vendor.o(($event) => handleSelect(item, child), child.categoryId),
-                f: "1cf27b2a-2-" + i0 + "-" + i1 + "," + ("1cf27b2a-1-" + i0)
+                b: common_vendor.t(child.topicCount),
+                c: common_vendor.t(child.categoryName),
+                d: common_vendor.o(($event) => handleSelect(item, child), child.categoryId),
+                e: child.categoryId,
+                f: "1cf27b2a-4-" + i0 + "-" + i1 + "," + ("1cf27b2a-3-" + i0)
               };
             }),
-            b: "1cf27b2a-1-" + i0,
+            b: "1cf27b2a-3-" + i0,
             c: index
           };
         }),
-        d: common_assets._imports_1,
-        e: common_vendor.p({
+        f: common_vendor.p({
           span: 12
         }),
-        f: isRefresher.value,
-        g: common_vendor.o(onPulling),
-        h: common_vendor.o(onRefresh),
-        i: common_vendor.o(onRestore)
+        g: isRefresher.value,
+        h: common_vendor.o(onPulling),
+        i: common_vendor.o(onRefresh),
+        j: common_vendor.o(onRestore)
       };
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "I:/face/pages/index/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "/Users/lichunlin/code/gitHub/face/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);
