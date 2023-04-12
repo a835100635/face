@@ -20,7 +20,7 @@
     "ignoreUploadUnusedFiles": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.25.3",
+  "libVersion": "2.30.2",
   "appid": "wx3072e210335fc176",
   "projectname": "face",
   "condition": {},
