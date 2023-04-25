@@ -24,7 +24,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 .user-main .avatar-block {
-  background-color: #141a23;
+  background-color: #ccc;
   height: 180px;
   display: flex;
   align-items: center;
@@ -70,9 +70,14 @@
 .user-main .avatar-block .info {
   flex: 1;
   height: 100%;
+  display: flex;
   position: relative;
 }
-.user-main .avatar-block .info .xhr {
+.user-main .avatar-block .info .user-banner {
+  width: 74px;
+  height: 104px;
+  flex: 1;
   position: absolute;
-  z-index: 1;
+  right: -34px;
+  bottom: 0;
 }

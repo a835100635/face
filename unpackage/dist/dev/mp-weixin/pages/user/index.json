@@ -2,6 +2,6 @@
   "navigationBarTitleText": "个人中心",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "xiao-huang-ren": "../../components/xiaohuangren"
+    "user-banner": "../../components/userBanner"
   }
 }

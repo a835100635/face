@@ -15,7 +15,7 @@
         <text class="nick-name">{{ userInfo.nickName || "未登录" }}</text>
       </view>
       <view class="info">
-        <user-banner class="xhr" />
+        <user-banner class="user-banner" />
       </view>
     </view>
   </view>
@@ -24,7 +24,7 @@
 <script setup>
 import { computed } from "vue";
 import { useStore } from "vuex";
-import UserBanner from "@/components/userBanner.vue.vue";
+import UserBanner from "@/components/userBanner.vue";
 
 const { state, getters, dispatch, commit } = useStore();
 
@@ -79,7 +79,7 @@ minProgramLogin();
 <style lang="scss">
 .user-main {
   .avatar-block {
-    background-color: #141a23;
+    background-color: #ccc;
     height: 180px;
     display: flex;
     align-items: center;
@@ -124,10 +124,15 @@ minProgramLogin();
     .info {
       flex: 1;
       height: 100%;
+      display: flex;
       position: relative;
-      .xhr {
+      .user-banner {
+        width: 74px;
+        height: 104px;
+        flex: 1;
         position: absolute;
-        z-index: 1;
+        right: -34px;
+        bottom: 0;
       }
     }
   }
