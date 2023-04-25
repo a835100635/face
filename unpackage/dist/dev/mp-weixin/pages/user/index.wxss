@@ -23,6 +23,56 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.user-main {
-  font-size: 10px;
+.user-main .avatar-block {
+  background-color: #141a23;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.user-main .avatar-block .avatar {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-right: 20px;
+}
+.user-main .avatar-block .avatar .img {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+.user-main .avatar-block .avatar .img .avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.user-main .avatar-block .avatar .img .iconfont {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 22px;
+}
+.user-main .avatar-block .avatar .img .avatar-img-icon {
+  font-size: 68px;
+}
+.user-main .avatar-block .avatar .nick-name {
+  text-align: center;
+  display: block;
+  color: white;
+  font-size: 14px;
+  margin-top: 4px;
+}
+.user-main .avatar-block .info {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+.user-main .avatar-block .info .xhr {
+  position: absolute;
+  z-index: 1;
 }

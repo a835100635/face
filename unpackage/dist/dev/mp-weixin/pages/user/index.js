@@ -1,11 +1,29 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+if (!Math) {
+  XiaoHuangRen();
+}
+const XiaoHuangRen = () => "../../components/xiaohuangren.js";
 const _sfc_main = {
   __name: "index",
   setup(__props) {
     const { state, getters, dispatch, commit } = common_vendor.useStore();
     const userInfo = common_vendor.computed(() => getters.getUserInfo);
+    const getUserGender = common_vendor.computed(() => {
+      const { gender } = userInfo.value;
+      switch (gender) {
+        case 1:
+          return "iconfont icon-nv";
+        case 2:
+          return "iconfont icon-nan";
+        default:
+          return "iconfont icon-wenhao-wuquan";
+      }
+    });
     const minProgramLogin = (res) => {
+      if (common_vendor.index.getStorageSync("face_has_login")) {
+        return;
+      }
       common_vendor.index.showModal({
         title: "授权登陆",
         content: "是否授权登录微信小程序？",
@@ -31,12 +49,16 @@ const _sfc_main = {
         }
       });
     };
+    minProgramLogin();
     return (_ctx, _cache) => {
-      return {
-        a: common_vendor.unref(userInfo).avatarUrl,
-        b: common_vendor.t(common_vendor.unref(userInfo).nickName),
-        c: common_vendor.o(minProgramLogin)
-      };
+      return common_vendor.e({
+        a: common_vendor.unref(userInfo).avatarUrl
+      }, common_vendor.unref(userInfo).avatarUrl ? {
+        b: common_vendor.unref(userInfo).avatarUrl
+      } : {}, {
+        c: common_vendor.n(common_vendor.unref(getUserGender)),
+        d: common_vendor.t(common_vendor.unref(userInfo).nickName || "未登录")
+      });
     };
   }
 };

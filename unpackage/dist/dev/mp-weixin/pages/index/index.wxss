@@ -24,7 +24,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 .container.data-v-1cf27b2a {
-  background-color: #dfe7ef;
+  background-color: #eff5fa;
   min-height: 100vh;
 }
 .container .banner-wrap.data-v-1cf27b2a {
@@ -37,13 +37,13 @@
 }
 .container .banner-wrap .text.data-v-1cf27b2a {
   position: absolute;
-  top: 90px;
+  top: 100px;
   right: 30px;
   color: #fff;
   font-weight: 600;
 }
 .container .banner-wrap .text_next.data-v-1cf27b2a {
-  top: 126px;
+  top: 136px;
 }
 .container .category-main .category-item.data-v-1cf27b2a {
   padding: 0 6px;
@@ -116,6 +116,10 @@
   top: 0;
   left: 0;
   z-index: -1;
+}
+.container .category-main .category-item .empty.data-v-1cf27b2a {
+  width: 307px;
+  height: 170px;
 }
 /**
  * 这里是uni-app内置的常用样式变量

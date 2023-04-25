@@ -13,15 +13,31 @@
     "backgroundColor": "#F8F8F8"
   },
   "tabBar": {
-    "color": "black",
-    "selectedColor": "red",
+    "color": "#ccc",
+    "selectedColor": "#3172f6",
     "list": [
       {
         "text": "首页",
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/home-active.png",
         "pagePath": "pages/index/index"
       },
       {
-        "text": "个人中心",
+        "text": "资讯",
+        "iconPath": "static/tabbar/message.png",
+        "selectedIconPath": "static/tabbar/message-active.png",
+        "pagePath": "pages/login/index"
+      },
+      {
+        "text": "资源",
+        "iconPath": "static/tabbar/file.png",
+        "selectedIconPath": "static/tabbar/file-active.png",
+        "pagePath": "pages/topic/index"
+      },
+      {
+        "text": "我的",
+        "iconPath": "static/tabbar/my.png",
+        "selectedIconPath": "static/tabbar/my-active.png",
         "pagePath": "pages/user/index"
       }
     ]

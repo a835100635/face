@@ -1,1 +1,1 @@
-<view class="user-main"><image src="{{a}}" alt="" srcset=""></image> {{b}} <button bindtap="{{c}}">获取dd</button></view>
+<view class="user-main"><view class="avatar-block"><view class="avatar"><view class="img"><image wx:if="{{a}}" class="avatar-img" src="{{b}}" mode="aspectFill"></image><view wx:else class="avatar-img-icon iconfont icon-icon-test2"></view><text class="{{c}}"></text></view><text class="nick-name">{{d}}</text></view><view class="info"><xiao-huang-ren class="xhr" u-i="8a87ce00-0" bind:__l="__l"/></view></view></view>

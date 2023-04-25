@@ -1,10 +1,11 @@
 @font-face {
-  font-family: "iconfont"; /* Project id 3949301 */
+  font-family: "iconfont";
+  /* Project id 3949301 */
   /* Color fonts */
-  src: 
-       url('//at.alicdn.com/t/c/font_3949301_waj7b0qu6u.woff2?t=1680405852762') format('woff2'),
-       url('//at.alicdn.com/t/c/font_3949301_waj7b0qu6u.woff?t=1680405852762') format('woff'),
-       url('//at.alicdn.com/t/c/font_3949301_waj7b0qu6u.ttf?t=1680405852762') format('truetype');
+  src:
+    url('//at.alicdn.com/t/c/font_3949301_zf3oz1r91np.woff2?t=1682416398246') format('woff2'),
+    url('//at.alicdn.com/t/c/font_3949301_zf3oz1r91np.woff?t=1682416398246') format('woff'),
+    url('//at.alicdn.com/t/c/font_3949301_zf3oz1r91np.ttf?t=1682416398246') format('truetype');
 }
 
 .iconfont {
@@ -13,6 +14,34 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-wenhao-wuquan:before {
+  content: "\e715";
+}
+
+.icon-nv:before {
+  content: "\e644";
+}
+
+.icon-nan:before {
+  content: "\e60f";
+}
+
+.icon-wenjian1:before {
+  content: "\e60e";
+}
+
+.icon-wode:before {
+  content: "\e63d";
+}
+
+.icon-yuanquzixun:before {
+  content: "\e74b";
+}
+
+.icon-shouye:before {
+  content: "\e66f";
 }
 
 .icon-icon:before {
