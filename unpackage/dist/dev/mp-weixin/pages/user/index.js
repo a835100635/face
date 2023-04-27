@@ -20,6 +20,8 @@ const _sfc_main = {
           return "iconfont icon-wenhao-wuquan";
       }
     });
+    const joinGroup = () => {
+    };
     const minProgramLogin = (res) => {
       if (common_vendor.index.getStorageSync("face_has_login")) {
         return;
@@ -57,10 +59,11 @@ const _sfc_main = {
         b: common_vendor.unref(userInfo).avatarUrl
       } : {}, {
         c: common_vendor.n(common_vendor.unref(getUserGender)),
-        d: common_vendor.t(common_vendor.unref(userInfo).nickName || "未登录")
+        d: common_vendor.t(common_vendor.unref(userInfo).nickName || "未登录"),
+        e: common_vendor.o(joinGroup)
       });
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "I:/face/pages/user/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-79e6a490"], ["__file", "/Users/lichunlin/code/gitHub/face/pages/user/index.vue"]]);
 wx.createPage(MiniProgramPage);

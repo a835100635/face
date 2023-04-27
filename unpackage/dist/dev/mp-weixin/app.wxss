@@ -24,17 +24,14 @@
 /* 透明度 */
 /* 文章场景相关 */
 /*每个页面公共css */
-/* * {
-	background-color: #373e69;
-} */
 @font-face {
   font-family: "iconfont";
   /* Project id 3949301 */
   /* Color fonts */
   src:
-    url('//at.alicdn.com/t/c/font_3949301_zf3oz1r91np.woff2?t=1682416398246') format('woff2'),
-    url('//at.alicdn.com/t/c/font_3949301_zf3oz1r91np.woff?t=1682416398246') format('woff'),
-    url('//at.alicdn.com/t/c/font_3949301_zf3oz1r91np.ttf?t=1682416398246') format('truetype');
+    url('//at.alicdn.com/t/c/font_3949301_03kel5fmle.woff2?t=1682559116910') format('woff2'),
+    url('//at.alicdn.com/t/c/font_3949301_03kel5fmle.woff?t=1682559116910') format('woff'),
+    url('//at.alicdn.com/t/c/font_3949301_03kel5fmle.ttf?t=1682559116910') format('truetype');
 }
 
 .iconfont {
@@ -43,6 +40,38 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-jiaruwomenbeifen2:before {
+  content: "\e610";
+}
+
+.icon-faxian:before {
+  content: "\e63e";
+}
+
+.icon-tuichu:before {
+  content: "\ecb3";
+}
+
+.icon-gerenshezhi:before {
+  content: "\e6b7";
+}
+
+.icon-icon_3-09:before {
+  content: "\e6cd";
+}
+
+.icon-shoucangdaogedan:before {
+  content: "\e607";
+}
+
+.icon-jiaruVIPfangjian-01:before {
+  content: "\e608";
+}
+
+.icon-weixin:before {
+  content: "\e630";
 }
 
 .icon-wenhao-wuquan:before {
@@ -139,6 +168,10 @@
 
 .icon-youjiantou:before {
   content: "\e68c";
+}
+
+.icon-youjiantou-copy:before {
+  content: "\ecb4";
 }
 
 .icon-java:before {

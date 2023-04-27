@@ -18,7 +18,8 @@
 			"path": "pages/user/index",
 			"style": {
 				"navigationBarTitleText": "个人中心",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"scrollIndicator": "none"
 			}
 
 		},
@@ -35,7 +36,6 @@
 				// 是否支持下拉上拉加载事件
 				"enablePullDownRefresh": true
 			}
-
 		},
 		{
 			"path": "pages/detail/index",
@@ -43,7 +43,20 @@
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
-
+		},
+		{
+			"path": "pages/resource/index",
+			"style": {
+				"navigationBarTitleText": "资源",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/resource/detail",
+			"style": {
+				"navigationBarTitleText": "资源详情",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 	"tabBar": {
@@ -65,7 +78,7 @@
 				"text": "资源",
 				"iconPath": "static/tabbar/file.png",
 				"selectedIconPath": "static/tabbar/file-active.png",
-				"pagePath": "pages/topic/index"
+				"pagePath": "pages/resource/index"
 			},
 			{
 				"text": "我的",
@@ -78,7 +91,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
+		"navigationBarBackgroundColor": "#ffffff",
 		"backgroundColor": "#F8F8F8"
 	},
 	"uniIdRouter": {},
