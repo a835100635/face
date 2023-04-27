@@ -41,11 +41,17 @@
                 {{ item.desc }}
               </view>
               <view class="fui-card__price">
-                <view class="fui-card__price-item">
+                <view
+                  class="fui-card__price-item"
+                  v-if="item.pointsPrice !== 0"
+                >
                   <text class="fui-card__price-item-text">
                     {{ item.pointsPrice }}
                   </text>
                   <text class="fui-card__price-item-text"> 积分</text>
+                </view>
+                <view class="fui-card__price-item" v-else>
+                  <text class="fui-card__price-item-text">免费</text>
                 </view>
                 <view class="fui-card__price-item">
                   <text
@@ -97,7 +103,7 @@ const dataList = ref([
     title: "标题文字",
     createTime: "2021-01-01",
     // src: "https://img.yzcdn.cn/vant/cat.jpeg",
-    desc: "这是一个基础卡片的示例，此处为自定义内容区域，自行控制内容样式。",
+    desc: "这是一个基础卡片的示例，此处为自定义内容区域，自行控制内容样式。这是一个基础卡片的示例，此处为自定义内容区域，自行控制内容样式。这是一个基础卡片的示例，此处为自定义内容区域，自行控制内容样式。这是一个基础卡片的示例，此处为自定义内容区域，自行控制内容样式。",
     pointsPrice: 7,
     purchased: true,
   },
@@ -138,6 +144,7 @@ const dataList = ref([
     purchased: false,
   },
 ]);
+currentTab.value = tabList.value[0];
 
 const clickTab = (index, item) => {
   currentIndex.value = index;
@@ -159,11 +166,11 @@ const handleSelect = (item) => {
 };
 // 点击查看
 const handleCheck = (item) => {
-  console.log(item);
+  console.log(item, currentTab.value);
   // 跳转页面 查看详情
   if (item.purchased) {
     uni.navigateTo({
-      url: `/pages/resource/detail?id=${item.id}`,
+      url: `/pages/resource/detail?id=${item.id}&categoryName=${currentTab.value.label}`,
     });
   }
 };
@@ -182,6 +189,7 @@ const handleCheck = (item) => {
       width: auto;
       display: flex;
       flex-wrap: nowrap;
+      padding-left: 20px;
       &-item {
         text-align: center;
         padding: 5px 10px;
@@ -204,7 +212,14 @@ const handleCheck = (item) => {
           height: auto;
           font-size: 13px;
           .fui-card__content {
-            padding: 10px;
+            padding: 10px 10px 0 10px;
+            // 3行超出省略号
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            margin-bottom: 10px;
+            color: #333;
           }
           .fui-card__price {
             display: flex;
