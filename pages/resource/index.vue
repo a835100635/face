@@ -16,6 +16,16 @@
         </view>
       </view>
     </view>
+    <!-- 通告栏 -->
+    <uni-notice-bar
+      scrollable
+      showIcon
+      single
+      speed="50"
+      color="rgb(41, 121, 255)"
+      background-color="rgb(234, 242, 255)"
+      :text="noticeText"
+    ></uni-notice-bar>
     <view class="swiper-tab-content">
       <swiper
         class="swiper-tab-content-wrap"
@@ -96,7 +106,7 @@ const tabList = ref([
     label: "工具",
   },
 ]);
-
+const noticeText = ref("限时积分兑换，积分不够的可以去赚积分哦~");
 const dataList = ref([
   {
     id: 0,
@@ -203,7 +213,7 @@ const handleCheck = (item) => {
   }
   .swiper-tab-content {
     flex: 99;
-    padding: 10px 0;
+    padding: 0 0 10px;
     &-wrap {
       height: 100%;
       .swiper-item {
