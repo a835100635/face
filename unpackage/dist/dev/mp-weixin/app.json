@@ -6,7 +6,9 @@
     "pages/topic/index",
     "pages/detail/index",
     "pages/resource/index",
-    "pages/resource/detail"
+    "pages/resource/detail",
+    "pages/information/index",
+    "pages/information/detail"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -28,7 +30,7 @@
         "text": "资讯",
         "iconPath": "static/tabbar/message.png",
         "selectedIconPath": "static/tabbar/message-active.png",
-        "pagePath": "pages/login/index"
+        "pagePath": "pages/information/index"
       },
       {
         "text": "资源",

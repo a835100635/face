@@ -57,7 +57,21 @@
 				"navigationBarTitleText": "资源详情",
 				"enablePullDownRefresh": false
 			}
-		}
+		},
+		{
+			"path": "pages/information/index",
+			"style": {
+				"navigationBarTitleText": "资讯",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/information/detail",
+			"style": {
+				"navigationBarTitleText": "资讯详情",
+				"enablePullDownRefresh": false
+			}
+		},
 	],
 	"tabBar": {
 		"color": "#ccc",
@@ -72,7 +86,7 @@
 				"text": "资讯",
 				"iconPath": "static/tabbar/message.png",
 				"selectedIconPath": "static/tabbar/message-active.png",
-				"pagePath": "pages/login/index"
+				"pagePath": "pages/information/index"
 			},
 			{
 				"text": "资源",

@@ -1,21 +1,10 @@
 <template>
   <view class="resource-container">
-    <view class="swiper-tab">
-      <view class="swiper-tab-wrap">
-        <view
-          :class="[
-            'swiper-tab-wrap-item',
-            currentIndex === index ? 'is-active' : '',
-          ]"
-          v-for="(item, index) in tabList"
-          :key="item.id"
-          data-current="0"
-          @click="clickTab(index, item)"
-        >
-          {{ item.label }}
-        </view>
-      </view>
-    </view>
+    <top-menu
+      :tabs="tabList"
+      :currentIndex="currentIndex"
+      @clickTab="clickTab"
+    />
     <!-- 通告栏 -->
     <uni-notice-bar
       scrollable
@@ -36,6 +25,7 @@
           class="swiper-item"
           v-for="(c, index) in tabList"
           :key="`${c.id}-${index}`"
+          data-id="{{c.id}}"
         >
           <view class="swiper-item-card-wrp">
             <fui-card
@@ -162,6 +152,7 @@ const clickTab = (index, item) => {
 };
 const bindChange = (e) => {
   console.log(e);
+  currentIndex.value = e.detail.current;
 };
 
 // 点击兑换
@@ -191,26 +182,6 @@ const handleCheck = (item) => {
   flex-direction: column;
   background-color: #f5f5f5;
   height: 100vh;
-  .swiper-tab {
-    width: 100%;
-    background-color: white;
-    overflow-x: auto;
-    &-wrap {
-      width: auto;
-      display: flex;
-      flex-wrap: nowrap;
-      padding-left: 20px;
-      &-item {
-        text-align: center;
-        padding: 5px 10px;
-        white-space: nowrap;
-        &.is-active {
-          color: $uni-color-primary;
-          border-bottom: 2px solid $uni-color-primary;
-        }
-      }
-    }
-  }
   .swiper-tab-content {
     flex: 99;
     padding: 0 0 10px;
