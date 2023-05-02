@@ -1,10 +1,11 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const common_assets = require("../../common/assets.js");
+const api_category = require("../../api/category.js");
+require("../../api/base.js");
 require("../../store/index.js");
 require("../../constans/index.js");
 require("../../api/user.js");
-require("../../api/base.js");
 require("../../store/modules/topic.js");
 require("../../api/topic.js");
 if (!Array) {
@@ -13,14 +14,18 @@ if (!Array) {
 }
 const _easycom_uni_notice_bar = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-notice-bar/uni-notice-bar.js";
 if (!Math) {
-  (fuiText + _easycom_uni_notice_bar + fuiCol + fuiRow)();
+  (fuiText + _easycom_uni_notice_bar + fuiCol + fuiRow + fuiEmpty + fuiLoading)();
 }
 const fuiRow = () => "../../components/firstui/fui-row/fui-row.js";
 const fuiCol = () => "../../components/firstui/fui-col/fui-col.js";
 const fuiText = () => "../../components/firstui/fui-text/fui-text.js";
+const fuiLoading = () => "../../components/firstui/fui-loading/fui-loading.js";
+const fuiEmpty = () => "../../components/firstui/fui-empty/fui-empty.js";
 const _sfc_main = {
   __name: "index",
   setup(__props) {
+    const isShowLoading = common_vendor.ref(false);
+    const loadingText = common_vendor.ref("加载中...");
     const isRefresher = common_vendor.ref(false);
     const noticeText = common_vendor.ref(
       "[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"
@@ -29,44 +34,30 @@ const _sfc_main = {
       {
         label: "前端",
         type: 0,
-        child: [
-          {
-            id: 1,
-            typeId: 0,
-            categoryName: "Vue",
-            topicCount: 1,
-            icon: "icon-Vue"
-          },
-          {
-            id: 3,
-            typeId: 0,
-            categoryName: "HTML",
-            topicCount: 5,
-            icon: "icon-html"
-          },
-          {
-            id: 4,
-            typeId: 0,
-            categoryName: "CSS",
-            topicCount: 5,
-            icon: "icon-css"
-          }
-        ]
+        child: []
       },
       {
         label: "后端",
         type: 1,
-        child: [
-          {
-            id: 2,
-            typeId: 1,
-            categoryName: "Java",
-            topicCount: 0,
-            icon: "icon-java"
-          }
-        ]
+        child: []
       }
     ]);
+    (async () => {
+      loadingText.value = "加载中...";
+      isShowLoading.value = true;
+      api_category.getCategory().then((result) => {
+        Object.keys(result).forEach((key) => {
+          const _ = data.value.find((i) => i.type == key);
+          _.child = result[key];
+        });
+      }).catch((err) => {
+        loadingText.value = "加载失败";
+      }).finally(() => {
+        setTimeout(() => {
+          isShowLoading.value = false;
+        }, 1e3);
+      });
+    })();
     const category = common_vendor.computed(() => {
       return data.value.filter((_) => _.child.length > 1);
     });
@@ -89,7 +80,7 @@ const _sfc_main = {
       console.log("onRestore", e);
     };
     return (_ctx, _cache) => {
-      return {
+      return common_vendor.e({
         a: common_assets._imports_0,
         b: common_vendor.p({
           text: "让面试",
@@ -129,11 +120,24 @@ const _sfc_main = {
         f: common_vendor.p({
           span: 12
         }),
-        g: isRefresher.value,
-        h: common_vendor.o(onPulling),
-        i: common_vendor.o(onRefresh),
-        j: common_vendor.o(onRestore)
-      };
+        g: !common_vendor.unref(category).length
+      }, !common_vendor.unref(category).length ? {
+        h: common_vendor.p({
+          src: common_vendor.unref(common_assets.emptyImg),
+          marginTop: "100"
+        })
+      } : {}, {
+        i: isRefresher.value,
+        j: common_vendor.o(onPulling),
+        k: common_vendor.o(onRefresh),
+        l: common_vendor.o(onRestore),
+        m: isShowLoading.value
+      }, isShowLoading.value ? {
+        n: common_vendor.p({
+          text: loadingText.value,
+          type: "col"
+        })
+      } : {});
     };
   }
 };

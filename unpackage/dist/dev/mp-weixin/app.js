@@ -13,6 +13,10 @@ if (!Math) {
   "./pages/login/index.js";
   "./pages/topic/index.js";
   "./pages/detail/index.js";
+  "./pages/resource/index.js";
+  "./pages/resource/detail.js";
+  "./pages/information/index.js";
+  "./pages/information/detail.js";
 }
 const _sfc_main = {
   onLaunch: function() {

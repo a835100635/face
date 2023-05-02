@@ -52,8 +52,7 @@
               :key="child.categoryId"
               :span="12"
             >
-              <view class="col" 
-                @click="handleSelect(item, child)">
+              <view class="col" @click="handleSelect(item, child)">
                 <view class="item">
                   <view class="content">
                     <view class="icon-top">
@@ -61,7 +60,9 @@
                     </view>
                     <view class="content-c">
                       <view class="count">
-                        <span class="n">{{ child.topicCount }}</span>题</view>
+                        <span class="n">{{ child.topicCount }}</span
+                        >题</view
+                      >
                       <view class="name">{{ child.categoryName }}</view>
                     </view>
                   </view>
@@ -70,8 +71,20 @@
             </fui-col>
           </fui-row>
         </view>
+        <fui-empty
+          class="empty"
+          v-if="!category.length"
+          :src="emptyImg"
+          marginTop="100"
+        ></fui-empty>
       </view>
     </scroll-view>
+
+    <fui-loading
+      v-if="isShowLoading"
+      :text="loadingText"
+      type="col"
+    ></fui-loading>
   </view>
 </template>
 
@@ -79,9 +92,14 @@
 import fuiRow from "@/components/firstui/fui-row/fui-row.vue";
 import fuiCol from "@/components/firstui/fui-col/fui-col.vue";
 import fuiText from "@/components/firstui/fui-text/fui-text.vue";
+import fuiLoading from "@/components/firstui/fui-loading/fui-loading.vue";
 import { getCategory } from "@/api/category.js";
 import { ref, computed } from "vue";
+import fuiEmpty from "@/components/firstui/fui-empty/fui-empty.vue";
+import emptyImg from "@/assets/images/empty.png";
 
+const isShowLoading = ref(false);
+const loadingText = ref("加载中...");
 // 下拉加载
 const isRefresher = ref(false);
 const noticeText = ref(
@@ -92,52 +110,34 @@ const data = ref([
   {
     label: "前端",
     type: 0,
-    child: [
-      {
-        id: 1,
-        typeId: 0,
-        categoryName: "Vue",
-        topicCount: 1,
-        icon: 'icon-Vue'
-      },
-      {
-        id: 3,
-        typeId: 0,
-        categoryName: "HTML",
-        topicCount: 5,
-        icon: 'icon-html'
-      },
-      {
-        id: 4,
-        typeId: 0,
-        categoryName: "CSS",
-        topicCount: 5,
-        icon: 'icon-css'
-      },
-    ],
+    child: [],
   },
   {
     label: "后端",
     type: 1,
-    child: [
-      {
-        id: 2,
-        typeId: 1,
-        categoryName: "Java",
-        topicCount: 0,
-        icon: 'icon-java'
-      },
-    ],
+    child: [],
   },
 ]);
 // 获取分类
-// (async () => {
-//   const result = await getCategory();
-//   Object.keys(result).forEach((key) => {
-//     const _ = data.value.find((i) => i.type == key);
-//     _.child = result[key];
-//   });
-// })();
+(async () => {
+  loadingText.value = "加载中...";
+  isShowLoading.value = true;
+  getCategory()
+    .then((result) => {
+      Object.keys(result).forEach((key) => {
+        const _ = data.value.find((i) => i.type == key);
+        _.child = result[key];
+      });
+    })
+    .catch((err) => {
+      loadingText.value = "加载失败";
+    })
+    .finally(() => {
+      setTimeout(() => {
+        isShowLoading.value = false;
+      }, 1000);
+    });
+})();
 const category = computed(() => {
   return data.value.filter((_) => _.child.length > 1);
 });
@@ -174,7 +174,7 @@ const onRestore = (e) => {
 
 <style lang="scss" scoped>
 .container {
-  background-color: #dfe7ef;
+  background-color: #eff5fa;
   min-height: 100vh;
 
   .banner-wrap {
@@ -186,13 +186,13 @@ const onRestore = (e) => {
     }
     .text {
       position: absolute;
-      top: 90px;
+      top: 100px;
       right: 30px;
       color: #fff;
       font-weight: 600;
     }
     .text_next {
-      top: 126px;
+      top: 136px;
     }
   }
 
@@ -224,21 +224,21 @@ const onRestore = (e) => {
               z-index: 2;
               text-align: center;
               line-height: 50px;
-                .iconfont {
-                  font-size: 32px;
-                }
-                &::before {
-                  content: "";
-                  position: absolute;
-                  display: block;
-                  width: 100%;
-                  height: 100%;
-                  background-color: white;
-                  box-shadow: 0px 10px 40px 0px rgba(109, 109, 109, 0.5);
-                  z-index: -1;
-                  opacity: 0.9;
-                  border-radius: 15px;
-                }
+              .iconfont {
+                font-size: 32px;
+              }
+              &::before {
+                content: "";
+                position: absolute;
+                display: block;
+                width: 100%;
+                height: 100%;
+                background-color: white;
+                box-shadow: 0px 10px 40px 0px rgba(109, 109, 109, 0.5);
+                z-index: -1;
+                opacity: 0.9;
+                border-radius: 15px;
+              }
             }
             .content-c {
               position: absolute;
@@ -267,6 +267,10 @@ const onRestore = (e) => {
             z-index: -1;
           }
         }
+      }
+      .empty {
+        width: 307px;
+        height: 170px;
       }
     }
   }

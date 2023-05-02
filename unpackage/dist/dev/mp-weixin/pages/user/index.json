@@ -1,5 +1,8 @@
 {
   "navigationBarTitleText": "个人中心",
   "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "scrollIndicator": "none",
+  "usingComponents": {
+    "user-banner": "../../components/userBanner"
+  }
 }

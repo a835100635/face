@@ -2,8 +2,8 @@
 	"easycom": {
 		"autoscan": true,
 		"custom": {
-				// uni-ui 规则如下配置
-				"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+			// uni-ui 规则如下配置
+			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
 		}
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
@@ -18,7 +18,8 @@
 			"path": "pages/user/index",
 			"style": {
 				"navigationBarTitleText": "个人中心",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"scrollIndicator": "none"
 			}
 
 		},
@@ -35,7 +36,6 @@
 				// 是否支持下拉上拉加载事件
 				"enablePullDownRefresh": true
 			}
-
 		},
 		{
 			"path": "pages/detail/index",
@@ -43,18 +43,61 @@
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
-
-		}
+		},
+		{
+			"path": "pages/resource/index",
+			"style": {
+				"navigationBarTitleText": "资源",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/resource/detail",
+			"style": {
+				"navigationBarTitleText": "资源详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/information/index",
+			"style": {
+				"navigationBarTitleText": "资讯",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/information/detail",
+			"style": {
+				"navigationBarTitleText": "资讯详情",
+				"enablePullDownRefresh": false
+			}
+		},
 	],
 	"tabBar": {
-		"color": "black",
-		"selectedColor": "red",
+		"color": "#ccc",
+		"selectedColor": "#3172f6",
 		"list": [{
 				"text": "首页",
+				"iconPath": "static/tabbar/home.png",
+				"selectedIconPath": "static/tabbar/home-active.png",
 				"pagePath": "pages/index/index"
 			},
 			{
-				"text": "个人中心",
+				"text": "资讯",
+				"iconPath": "static/tabbar/message.png",
+				"selectedIconPath": "static/tabbar/message-active.png",
+				"pagePath": "pages/information/index"
+			},
+			{
+				"text": "资源",
+				"iconPath": "static/tabbar/file.png",
+				"selectedIconPath": "static/tabbar/file-active.png",
+				"pagePath": "pages/resource/index"
+			},
+			{
+				"text": "我的",
+				"iconPath": "static/tabbar/my.png",
+				"selectedIconPath": "static/tabbar/my-active.png",
 				"pagePath": "pages/user/index"
 			}
 		]
@@ -62,7 +105,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
+		"navigationBarBackgroundColor": "#ffffff",
 		"backgroundColor": "#F8F8F8"
 	},
 	"uniIdRouter": {},

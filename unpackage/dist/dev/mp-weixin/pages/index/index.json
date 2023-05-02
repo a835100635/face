@@ -4,6 +4,8 @@
     "uni-notice-bar": "../../node-modules/@dcloudio/uni-ui/lib/uni-notice-bar/uni-notice-bar",
     "fui-row": "../../components/firstui/fui-row/fui-row",
     "fui-col": "../../components/firstui/fui-col/fui-col",
-    "fui-text": "../../components/firstui/fui-text/fui-text"
+    "fui-text": "../../components/firstui/fui-text/fui-text",
+    "fui-loading": "../../components/firstui/fui-loading/fui-loading",
+    "fui-empty": "../../components/firstui/fui-empty/fui-empty"
   }
 }
