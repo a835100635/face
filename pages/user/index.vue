@@ -13,12 +13,16 @@
           <i class="avatar-img-icon iconfont icon-icon-test2" v-else></i>
           <text :class="getUserGender"></text>
         </view>
-        <text class="nick-name" v-if="userInfo.nickName">{{
-          userInfo.nickName
+        <text class="nick-name avatar-item" v-if="userName">{{
+          userName
         }}</text>
-        <text class="nick-name" v-else @click="minProgramLogin">点击登录</text>
+        <text class="nick-name avatar-item" v-else @click="minProgramLogin"
+          >点击登录</text
+        >
       </view>
       <view class="info">
+        <text class="info-item score">积分: {{ userInfo.score }}</text>
+        <text class="info-item slogan">{{ userInfo.slogan }}</text>
         <user-banner class="user-banner" />
       </view>
     </view>
@@ -52,7 +56,23 @@
         </view>
         <view class="container-item-content">
           <view class="container-item-content-title">个人信息</view>
-          <view class="container-item-content-desc">昵称、头像等等</view>
+          <view class="container-item-content-desc"
+            >用户id、昵称、个性签名等等</view
+          >
+        </view>
+        <view class="container-item-arrow">
+          <i class="iconfont icon-youjiantou-copy"></i>
+        </view>
+      </view>
+
+      <!-- 我的积分 -->
+      <view class="container-item setting-item">
+        <view class="container-item-icon">
+          <i class="iconfont icon-jifen"></i>
+        </view>
+        <view class="container-item-content">
+          <view class="container-item-content-title">我的积分</view>
+          <view class="container-item-content-desc">积分</view>
         </view>
         <view class="container-item-arrow">
           <i class="iconfont icon-youjiantou-copy"></i>
@@ -185,6 +205,9 @@ const avatar = computed(() => {
   }
   return avatarUrl || "";
 });
+const userName = computed(
+  () => userInfo.value.userName || userInfo.value.nickName
+);
 // 微信头像
 const wxAvatarUrl = computed(() => userInfo.value.avatarUrl);
 
@@ -282,6 +305,7 @@ const selectAvatarType = (type) => {
 const handleWxAvatar = () => {
   // 删除自定义头像 默认使用微信头像
   try {
+    uni.showLoading({ title: "加载中" });
     updateUserInfo({
       customAvatarUrl: "",
     }).then((res) => {
@@ -299,6 +323,7 @@ const handlePhoto = () => {
     sourceType: ["album"],
     success: async (res) => {
       const filePath = res.tempFilePaths[0];
+      uni.showLoading({ title: "加载中" });
       handleUploadFileAction(filePath);
     },
   });
@@ -310,6 +335,7 @@ const handlePicture = () => {
     sourceType: ["camera"],
     success: (res) => {
       const filePath = res.tempFilePaths[0];
+      uni.showLoading({ title: "加载中" });
       handleUploadFileAction(filePath);
     },
   });
@@ -407,14 +433,16 @@ const handleUploadFileAction = (filePath) => {
           font-size: 62px;
         }
       }
-      .nick-name {
+      .avatar-item {
         position: relative;
         text-align: center;
         display: block;
+        z-index: 2;
         color: white;
+      }
+      .nick-name {
         font-size: 14px;
         margin-top: 4px;
-        z-index: 2;
       }
     }
     .info {
@@ -422,6 +450,19 @@ const handleUploadFileAction = (filePath) => {
       height: 100%;
       display: flex;
       position: relative;
+      flex-direction: column;
+      justify-content: center;
+      .info-item {
+        display: flex;
+        align-items: center;
+        color: white;
+        font-size: 12px;
+        margin-bottom: 4px;
+        &.slogan {
+          margin-right: 30px;
+          margin-top: 10px;
+        }
+      }
       .user-banner {
         width: 74px;
         height: 104px;

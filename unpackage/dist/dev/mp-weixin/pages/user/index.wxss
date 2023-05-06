@@ -87,20 +87,35 @@
 .user-main .avatar-block .avatar .img .avatar-img-icon {
   font-size: 62px;
 }
-.user-main .avatar-block .avatar .nick-name {
+.user-main .avatar-block .avatar .avatar-item {
   position: relative;
   text-align: center;
   display: block;
+  z-index: 2;
   color: white;
+}
+.user-main .avatar-block .avatar .nick-name {
   font-size: 14px;
   margin-top: 4px;
-  z-index: 2;
 }
 .user-main .avatar-block .info {
   flex: 1;
   height: 100%;
   display: flex;
   position: relative;
+  flex-direction: column;
+  justify-content: center;
+}
+.user-main .avatar-block .info .info-item {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+.user-main .avatar-block .info .info-item.slogan {
+  margin-right: 30px;
+  margin-top: 10px;
 }
 .user-main .avatar-block .info .user-banner {
   width: 74px;

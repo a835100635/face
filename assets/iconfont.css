@@ -3,9 +3,9 @@
   /* Project id 3949301 */
   /* Color fonts */
   src:
-    url('//at.alicdn.com/t/c/font_3949301_03kel5fmle.woff2?t=1682559116910') format('woff2'),
-    url('//at.alicdn.com/t/c/font_3949301_03kel5fmle.woff?t=1682559116910') format('woff'),
-    url('//at.alicdn.com/t/c/font_3949301_03kel5fmle.ttf?t=1682559116910') format('truetype');
+    url('//at.alicdn.com/t/c/font_3949301_0gk4gge8zde.woff2?t=1683367889931') format('woff2'),
+    url('//at.alicdn.com/t/c/font_3949301_0gk4gge8zde.woff?t=1683367889931') format('woff'),
+    url('//at.alicdn.com/t/c/font_3949301_0gk4gge8zde.ttf?t=1683367889931') format('truetype');
 }
 
 .iconfont {
@@ -14,6 +14,14 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-jifen:before {
+  content: "\100c1";
+}
+
+.icon-tupian:before {
+  content: "\e870";
 }
 
 .icon-jiaruwomenbeifen2:before {

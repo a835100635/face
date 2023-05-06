@@ -24,6 +24,9 @@ const _sfc_main = {
       }
       return avatarUrl || "";
     });
+    const userName = common_vendor.computed(
+      () => userInfo.value.userName || userInfo.value.nickName
+    );
     const wxAvatarUrl = common_vendor.computed(() => userInfo.value.avatarUrl);
     const getUserGender = common_vendor.computed(() => {
       const { gender } = userInfo.value;
@@ -96,6 +99,7 @@ const _sfc_main = {
     };
     const handleWxAvatar = () => {
       try {
+        common_vendor.index.showLoading({ title: "加载中" });
         api_user.updateUserInfo({
           customAvatarUrl: ""
         }).then((res) => {
@@ -112,6 +116,7 @@ const _sfc_main = {
         sourceType: ["album"],
         success: async (res) => {
           const filePath = res.tempFilePaths[0];
+          common_vendor.index.showLoading({ title: "加载中" });
           handleUploadFileAction(filePath);
         }
       });
@@ -122,6 +127,7 @@ const _sfc_main = {
         sourceType: ["camera"],
         success: (res) => {
           const filePath = res.tempFilePaths[0];
+          common_vendor.index.showLoading({ title: "加载中" });
           handleUploadFileAction(filePath);
         }
       });
@@ -148,23 +154,25 @@ const _sfc_main = {
       } : {}, {
         c: common_vendor.n(common_vendor.unref(getUserGender)),
         d: common_vendor.o(changeAvatar),
-        e: common_vendor.unref(userInfo).nickName
-      }, common_vendor.unref(userInfo).nickName ? {
-        f: common_vendor.t(common_vendor.unref(userInfo).nickName)
+        e: common_vendor.unref(userName)
+      }, common_vendor.unref(userName) ? {
+        f: common_vendor.t(common_vendor.unref(userName))
       } : {
         g: common_vendor.o(minProgramLogin)
       }, {
-        h: common_vendor.o(joinGroup),
-        i: common_vendor.o(($event) => jumpPage("/pages/user/views/changeUserInfo")),
-        j: common_vendor.unref(wxAvatarUrl)
+        h: common_vendor.t(common_vendor.unref(userInfo).score),
+        i: common_vendor.t(common_vendor.unref(userInfo).slogan),
+        j: common_vendor.o(joinGroup),
+        k: common_vendor.o(($event) => jumpPage("/pages/user/views/changeUserInfo")),
+        l: common_vendor.unref(wxAvatarUrl)
       }, common_vendor.unref(wxAvatarUrl) ? {
-        k: common_vendor.unref(wxAvatarUrl)
+        m: common_vendor.unref(wxAvatarUrl)
       } : {}, {
-        l: common_vendor.o(($event) => selectAvatarType("wx")),
-        m: common_vendor.o(($event) => selectAvatarType("photo")),
-        n: common_vendor.o(($event) => selectAvatarType("picture")),
-        o: common_vendor.o(closePopup),
-        p: common_vendor.p({
+        n: common_vendor.o(($event) => selectAvatarType("wx")),
+        o: common_vendor.o(($event) => selectAvatarType("photo")),
+        p: common_vendor.o(($event) => selectAvatarType("picture")),
+        q: common_vendor.o(closePopup),
+        r: common_vendor.p({
           show: showBottomPopup.value
         })
       });
