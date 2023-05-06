@@ -1,5 +1,5 @@
 import store from '../store/index.js';
-import { BASEURL, HTTP_STATUS } from '../constans/index.js';
+import { BASEURL, HTTP_STATUS } from '../constants/index.js';
 
 const headerConfig = () => {
 	return {
@@ -28,10 +28,10 @@ const request = (method, url, data, config = {}) => {
 						icon: 'error',
 						duration: 2000
 					});
-					reject( data || res.data);
+					reject(data || res.data);
 					setTimeout(() => {
 						uni.switchTab({
-							url:`/pages/user/index`
+							url: `/pages/user/index`
 						});
 					}, 2000)
 					return;
@@ -39,7 +39,7 @@ const request = (method, url, data, config = {}) => {
 				if (code === HTTP_STATUS.SUCCESS) {
 					resolve(data);
 				} else {
-					reject( data || res.data);
+					reject(data || res.data);
 				}
 			},
 			fail: (msg) => {

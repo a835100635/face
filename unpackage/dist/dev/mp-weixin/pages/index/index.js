@@ -4,7 +4,7 @@ const common_assets = require("../../common/assets.js");
 const api_category = require("../../api/category.js");
 require("../../api/base.js");
 require("../../store/index.js");
-require("../../constans/index.js");
+require("../../constants/index.js");
 require("../../api/user.js");
 require("../../store/modules/topic.js");
 require("../../api/topic.js");

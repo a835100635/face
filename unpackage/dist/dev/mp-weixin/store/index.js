@@ -1,15 +1,17 @@
 "use strict";
 const common_vendor = require("../common/vendor.js");
-const constans_index = require("../constans/index.js");
+const constants_index = require("../constants/index.js");
 const api_user = require("../api/user.js");
 const store_modules_topic = require("./modules/topic.js");
 const store = common_vendor.createStore({
   //存放状态
   state: {
     // 登录状态
-    isLogin: false,
-    userInfo: {},
-    accessToken: void 0
+    isLogin: common_vendor.index.getStorageSync(constants_index.HAS_LOGIN_NAME) || false,
+    // 用户信息
+    userInfo: common_vendor.index.getStorageSync(constants_index.USER_INFO_NAME) || {},
+    // token
+    accessToken: common_vendor.index.getStorageSync(constants_index.TOKEN_NAME) || ""
   },
   getters: {
     getUserInfo: (state) => {
@@ -19,7 +21,7 @@ const store = common_vendor.createStore({
       if (state.accessToken) {
         return state.accessToken;
       }
-      return common_vendor.index.getStorageSync(constans_index.TOKEN_NAME);
+      return common_vendor.index.getStorageSync(constants_index.TOKEN_NAME);
     },
     checkLogin: (state) => {
       return state.isLogin;
@@ -42,7 +44,8 @@ const store = common_vendor.createStore({
      * @param {Object} state
      * @param {Object} params
      */
-    async loginAction({ commit }, params) {
+    async loginAction({ commit, dispatch }, params) {
+      console.log("-登录参数", params);
       const {
         provider = "weixin",
         userInfo
@@ -52,7 +55,7 @@ const store = common_vendor.createStore({
         const loginData = await api_user.login({ code: uniLogin.code });
         const { token } = loginData;
         commit("setAccessToken", token);
-        common_vendor.index.setStorage({ key: constans_index.TOKEN_NAME, data: token });
+        common_vendor.index.setStorage({ key: constants_index.TOKEN_NAME, data: token });
         const { gender, avatarUrl, city, country, province, nickName } = userInfo;
         const newUserInfo = await api_user.updateUserInfo({
           nickName,
@@ -62,10 +65,9 @@ const store = common_vendor.createStore({
           province,
           gender
         });
-        commit("setUserInfo", newUserInfo);
         commit("setLoginStatus", true);
-        common_vendor.index.setStorage({ key: constans_index.HAS_LOGIN_NAME, data: true });
-        common_vendor.index.setStorage({ key: constans_index.USER_INFO_NAME, data: newUserInfo });
+        common_vendor.index.setStorage({ key: constants_index.HAS_LOGIN_NAME, data: true });
+        dispatch("updateUserInfoAction", newUserInfo);
         common_vendor.index.showToast({
           title: "登录成功",
           icon: "success",
@@ -79,6 +81,12 @@ const store = common_vendor.createStore({
           duration: 2e3
         });
       }
+    },
+    // 更新用户信息
+    async updateUserInfoAction({ commit }, params) {
+      console.log("=updateUserInfoAction", params);
+      commit("setUserInfo", params);
+      common_vendor.index.setStorage({ key: constants_index.USER_INFO_NAME, data: params });
     }
   },
   modules: {

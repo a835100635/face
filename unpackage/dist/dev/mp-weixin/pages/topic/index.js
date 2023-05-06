@@ -1,6 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
-const constans_index = require("../../constans/index.js");
+const constants_index = require("../../constants/index.js");
 const fuiLoading = () => "../../components/firstui/fui-loading/fui-loading.js";
 const _sfc_main = {
   components: {
@@ -11,26 +11,35 @@ const _sfc_main = {
       title: e.title
     });
     this.options = e;
-    this.store.commit("topic/changeQuery", Object.assign({}, this.query, {
-      categoryId: e.categoryId,
-      pageNum: 1
-    }));
+    this.store.commit(
+      "topic/changeQuery",
+      Object.assign({}, this.query, {
+        categoryId: e.categoryId,
+        pageNum: 1
+      })
+    );
     this.fetchData();
   },
   // 上拉加载
   onReachBottom(e) {
     if (this.isDone) {
       this.isReachBottom = true;
-      this.store.commit("topic/changeQuery", Object.assign({}, this.query, {
-        pageNum: this.query.pageNum + 1
-      }));
+      this.store.commit(
+        "topic/changeQuery",
+        Object.assign({}, this.query, {
+          pageNum: this.query.pageNum + 1
+        })
+      );
       this.fetchData();
     }
   },
   onPullDownRefresh() {
-    this.store.commit("topic/changeQuery", Object.assign({}, this.query, {
-      pageNum: 1
-    }));
+    this.store.commit(
+      "topic/changeQuery",
+      Object.assign({}, this.query, {
+        pageNum: 1
+      })
+    );
     this.store.commit("topic/cleanTopicList");
     this.fetchData();
   },
@@ -61,10 +70,13 @@ const _sfc_main = {
   },
   methods: {
     searchAction() {
-      this.store.commit("topic/changeQuery", Object.assign({}, this.query, {
-        topic: this.topic,
-        pageNum: 1
-      }));
+      this.store.commit(
+        "topic/changeQuery",
+        Object.assign({}, this.query, {
+          topic: this.topic,
+          pageNum: 1
+        })
+      );
       this.store.commit("topic/cleanTopicList");
       this.fetchData();
     },
@@ -91,7 +103,7 @@ const _sfc_main = {
     handleSelect(item, index) {
       const { topic, id } = item;
       common_vendor.index.navigateTo({
-        url: `/pages/detail/index?topic=${topic}&id=${id}&index=${index}&checkType=${constans_index.CHECK_TYPE.READ}`
+        url: `/pages/detail/index?topic=${topic}&id=${id}&index=${index}&checkType=${constants_index.CHECK_TYPE.READ}`
       });
     }
   }

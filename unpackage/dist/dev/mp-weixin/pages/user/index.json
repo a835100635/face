@@ -3,6 +3,7 @@
   "enablePullDownRefresh": false,
   "scrollIndicator": "none",
   "usingComponents": {
-    "user-banner": "../../components/userBanner"
+    "user-banner": "../../components/userBanner",
+    "fui-bottom-popup": "../../components/firstui/fui-bottom-popup/fui-bottom-popup"
   }
 }

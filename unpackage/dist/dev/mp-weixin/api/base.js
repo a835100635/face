@@ -1,7 +1,7 @@
 "use strict";
 const common_vendor = require("../common/vendor.js");
 const store_index = require("../store/index.js");
-const constans_index = require("../constans/index.js");
+const constants_index = require("../constants/index.js");
 const headerConfig = () => {
   return {
     "X-ProductName": "Face",
@@ -12,7 +12,7 @@ const headerConfig = () => {
 const request = (method, url, data, config = {}) => {
   return new Promise((resolve, reject) => {
     common_vendor.index.request({
-      url: `${constans_index.BASEURL}${url}`,
+      url: `${constants_index.BASEURL}${url}`,
       data,
       method,
       header: {
@@ -36,7 +36,7 @@ const request = (method, url, data, config = {}) => {
           }, 2e3);
           return;
         }
-        if (code === constans_index.HTTP_STATUS.SUCCESS) {
+        if (code === constants_index.HTTP_STATUS.SUCCESS) {
           resolve(data2);
         } else {
           reject(data2 || res.data);

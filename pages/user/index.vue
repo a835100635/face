@@ -3,17 +3,20 @@
     <!-- 头像等信息 -->
     <view class="avatar-block">
       <view class="avatar">
-        <view class="img">
+        <view class="img" @click="changeAvatar">
           <image
-            v-if="userInfo.avatarUrl"
+            v-if="avatar"
             class="avatar-img"
-            :src="userInfo.avatarUrl"
+            :src="avatar"
             mode="aspectFill"
           ></image>
           <i class="avatar-img-icon iconfont icon-icon-test2" v-else></i>
           <text :class="getUserGender"></text>
         </view>
-        <text class="nick-name">{{ userInfo.nickName || "未登录" }}</text>
+        <text class="nick-name" v-if="userInfo.nickName">{{
+          userInfo.nickName
+        }}</text>
+        <text class="nick-name" v-else @click="minProgramLogin">点击登录</text>
       </view>
       <view class="info">
         <user-banner class="user-banner" />
@@ -40,7 +43,10 @@
     <!-- 设置 -->
     <view class="container-block">
       <!-- 个人信息 -->
-      <view class="container-item">
+      <view
+        class="container-item"
+        @click="jumpPage('/pages/user/views/changeUserInfo')"
+      >
         <view class="container-item-icon">
           <i class="iconfont icon-gerenshezhi"></i>
         </view>
@@ -133,17 +139,54 @@
         </view>
       </view>
     </view>
+
+    <fui-bottom-popup
+      class="avatar-popup"
+      :show="showBottomPopup"
+      @close="closePopup"
+    >
+      <view class="fui-custom__wrap" @click="selectAvatarType('wx')">
+        <text> 用微信头像 </text>
+        <image
+          v-if="wxAvatarUrl"
+          class="avatar-img"
+          :src="wxAvatarUrl"
+          mode="aspectFill"
+        ></image>
+        <i class="avatar-img-icon iconfont icon-icon-test2" v-else></i>
+      </view>
+      <view class="fui-custom__wrap" @click="selectAvatarType('photo')">
+        <text> 从相册选择 </text>
+      </view>
+      <view class="fui-custom__wrap" @click="selectAvatarType('picture')">
+        <text> 拍照 </text>
+      </view>
+    </fui-bottom-popup>
   </view>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import { updateUserInfo } from "@/api/user";
+import { uploadFile } from "@/api/common";
 import UserBanner from "@/components/userBanner.vue";
+import fuiBottomPopup from "@/components/firstui/fui-bottom-popup/fui-bottom-popup.vue";
+import { QINIU_URL } from "@/constants/index.js";
 
 const { state, getters, dispatch, commit } = useStore();
 
 const userInfo = computed(() => getters.getUserInfo);
+// 获取头像
+const avatar = computed(() => {
+  const { avatarUrl, customAvatarUrl } = userInfo.value;
+  if (customAvatarUrl) {
+    return `${QINIU_URL}/${customAvatarUrl}`;
+  }
+  return avatarUrl || "";
+});
+// 微信头像
+const wxAvatarUrl = computed(() => userInfo.value.avatarUrl);
 
 const getUserGender = computed(() => {
   const { gender } = userInfo.value;
@@ -170,6 +213,14 @@ const joinGroup = () => {
   // })
 };
 
+const jumpPage = (url) => {
+  console.log(url);
+  uni.navigateTo({
+    url,
+  });
+};
+
+// 登录
 const minProgramLogin = (res) => {
   if (uni.getStorageSync("face_has_login")) {
     return;
@@ -201,14 +252,95 @@ const minProgramLogin = (res) => {
     },
   });
 };
-minProgramLogin();
+
+const showBottomPopup = ref(false);
+const changeAvatar = () => {
+  showBottomPopup.value = true;
+};
+const closePopup = () => {
+  showBottomPopup.value = false;
+};
+
+// 选择使用头像类型
+const selectAvatarType = (type) => {
+  switch (type) {
+    case "wx":
+      handleWxAvatar();
+      break;
+    case "photo":
+      handlePhoto();
+      break;
+    case "picture":
+      handlePicture();
+      break;
+    default:
+      break;
+  }
+  closePopup();
+};
+// 使用微信头像
+const handleWxAvatar = () => {
+  // 删除自定义头像 默认使用微信头像
+  try {
+    updateUserInfo({
+      customAvatarUrl: "",
+    }).then((res) => {
+      uni.showToast({ title: "修改成功", icon: "none" });
+      dispatch("updateUserInfoAction", res);
+    });
+  } catch (error) {
+    uni.showToast({ title: error.message, icon: "none" });
+  }
+};
+// 选择照片
+const handlePhoto = () => {
+  uni.chooseImage({
+    count: 1,
+    sourceType: ["album"],
+    success: async (res) => {
+      const filePath = res.tempFilePaths[0];
+      handleUploadFileAction(filePath);
+    },
+  });
+};
+// 拍照
+const handlePicture = () => {
+  uni.chooseImage({
+    count: 1,
+    sourceType: ["camera"],
+    success: (res) => {
+      const filePath = res.tempFilePaths[0];
+      handleUploadFileAction(filePath);
+    },
+  });
+};
+// 上传图片
+const handleUploadFileAction = (filePath) => {
+  uploadFile(filePath)
+    .then((result) => {
+      updateUserInfo({
+        customAvatarUrl: result.data.url,
+      }).then((res) => {
+        uni.showToast({ title: "修改成功", icon: "none" });
+        dispatch("updateUserInfoAction", res);
+      });
+    })
+    .catch((err) => {
+      uni.showToast({ title: "上传失败", icon: "none" });
+    })
+    .finally(() => {
+      uni.hideLoading();
+    });
+};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .user-main {
   padding-bottom: 20px;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  min-height: 100vh;
   .avatar-block {
-    mix-blend-mode: screen;
     height: 180px;
     display: flex;
     align-items: center;
@@ -231,7 +363,6 @@ minProgramLogin();
         #af002d 41.07%,
         #319197 76.05%
       );
-      mix-blend-mode: screen;
       position: absolute;
       top: 0;
       left: 0;
@@ -277,11 +408,13 @@ minProgramLogin();
         }
       }
       .nick-name {
+        position: relative;
         text-align: center;
         display: block;
         color: white;
         font-size: 14px;
         margin-top: 4px;
+        z-index: 2;
       }
     }
     .info {
@@ -396,6 +529,26 @@ minProgramLogin();
     width: 0px;
     height: 0px;
     color: transparent;
+  }
+}
+.avatar-popup {
+  .fui-custom__wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+    .avatar-img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .avatar-img-icon {
+      font-size: 30px;
+    }
   }
 }
 </style>

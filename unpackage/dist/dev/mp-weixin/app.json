@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/user/index",
+    "pages/user/views/changeUserInfo",
     "pages/login/index",
     "pages/topic/index",
     "pages/detail/index",

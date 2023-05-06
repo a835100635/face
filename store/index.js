@@ -6,7 +6,7 @@ import {
 	TOKEN_NAME,
 	HAS_LOGIN_NAME,
 	USER_INFO_NAME
-} from '../constans/index.js';
+} from '../constants/index.js';
 import {
 	login,
 	updateUserInfo
@@ -18,9 +18,11 @@ const store = createStore({
 	//存放状态
 	state: {
 		// 登录状态
-		isLogin: false,
-		userInfo: {},
-		accessToken: undefined
+		isLogin: uni.getStorageSync(HAS_LOGIN_NAME) || false,
+		// 用户信息
+		userInfo: uni.getStorageSync(USER_INFO_NAME) || {},
+		// token
+		accessToken: uni.getStorageSync(TOKEN_NAME) || '',
 	},
 	getters: {
 		getUserInfo: (state) => {
@@ -53,7 +55,8 @@ const store = createStore({
 		 * @param {Object} state
 		 * @param {Object} params
 		 */
-		async loginAction({ commit }, params) {
+		async loginAction({ commit, dispatch }, params) {
+			console.log('-登录参数', params)
 			const {
 				provider = 'weixin',
 				userInfo
@@ -69,7 +72,7 @@ const store = createStore({
 				uni.setStorage({ key: TOKEN_NAME, data: token });
 				// 更新用户信息
 				const { gender, avatarUrl, city, country, province, nickName } = userInfo;
-				const newUserInfo = await	updateUserInfo({
+				const newUserInfo = await updateUserInfo({
 					nickName,
 					avatarUrl,
 					city,
@@ -77,10 +80,11 @@ const store = createStore({
 					province,
 					gender,
 				});
-				commit('setUserInfo', newUserInfo);
+
 				commit('setLoginStatus', true);
-				uni.setStorage({key: HAS_LOGIN_NAME, data: true});
-				uni.setStorage({key: USER_INFO_NAME, data: newUserInfo});
+				uni.setStorage({ key: HAS_LOGIN_NAME, data: true });
+
+				dispatch('updateUserInfoAction', newUserInfo)
 
 				uni.showToast({
 					title: '登录成功',
@@ -95,8 +99,13 @@ const store = createStore({
 					duration: 2000
 				})
 			}
-
 		},
+		// 更新用户信息
+		async updateUserInfoAction({ commit }, params) {
+			console.log('=updateUserInfoAction', params)
+			commit('setUserInfo', params);
+			uni.setStorage({ key: USER_INFO_NAME, data: params });
+		}
 	},
 	modules: {
 		// 题目模块
