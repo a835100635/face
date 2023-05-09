@@ -16,6 +16,9 @@ const _sfc_main = {
   __name: "index",
   setup(__props) {
     const { state, getters, dispatch, commit } = common_vendor.useStore();
+    const isLogin = common_vendor.computed(() => {
+      return userInfo.value && getters.checkLogin;
+    });
     const userInfo = common_vendor.computed(() => getters.getUserInfo);
     const avatar = common_vendor.computed(() => {
       const { avatarUrl, customAvatarUrl } = userInfo.value;
@@ -146,6 +149,9 @@ const _sfc_main = {
         common_vendor.index.hideLoading();
       });
     };
+    const logout = () => {
+      dispatch("logoutAction");
+    };
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.unref(avatar)
@@ -164,15 +170,20 @@ const _sfc_main = {
         i: common_vendor.t(common_vendor.unref(userInfo).slogan),
         j: common_vendor.o(joinGroup),
         k: common_vendor.o(($event) => jumpPage("/pages/user/views/changeUserInfo")),
-        l: common_vendor.unref(wxAvatarUrl)
-      }, common_vendor.unref(wxAvatarUrl) ? {
-        m: common_vendor.unref(wxAvatarUrl)
+        l: common_vendor.o(($event) => jumpPage("/pages/user/views/integralLog")),
+        m: common_vendor.unref(isLogin)
+      }, common_vendor.unref(isLogin) ? {
+        n: common_vendor.o(logout)
       } : {}, {
-        n: common_vendor.o(($event) => selectAvatarType("wx")),
-        o: common_vendor.o(($event) => selectAvatarType("photo")),
-        p: common_vendor.o(($event) => selectAvatarType("picture")),
-        q: common_vendor.o(closePopup),
-        r: common_vendor.p({
+        o: common_vendor.unref(wxAvatarUrl)
+      }, common_vendor.unref(wxAvatarUrl) ? {
+        p: common_vendor.unref(wxAvatarUrl)
+      } : {}, {
+        q: common_vendor.o(($event) => selectAvatarType("wx")),
+        r: common_vendor.o(($event) => selectAvatarType("photo")),
+        s: common_vendor.o(($event) => selectAvatarType("picture")),
+        t: common_vendor.o(closePopup),
+        v: common_vendor.p({
           show: showBottomPopup.value
         })
       });

@@ -20,6 +20,7 @@ const request = (method, url, data, config = {}) => {
 				...config,
 			},
 			success: (res) => {
+				console.log('request====>', res.data)
 				const { statusCode } = res;
 				const { code, data } = res.data;
 				if (statusCode === 401) {

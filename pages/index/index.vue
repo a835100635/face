@@ -18,10 +18,15 @@
           class="banner"
           mode="aspectFill"
         ></image>
-        <fui-text class="text" text="让面试" :size="60" color="#fff"></fui-text>
+        <fui-text
+          class="text"
+          text="让每个人都成为"
+          :size="60"
+          color="#fff"
+        ></fui-text>
         <fui-text
           class="text text_next"
-          text="不再是问题"
+          text="终身学习的受益者"
           :size="40"
           color="#fff"
         ></fui-text>
@@ -187,7 +192,7 @@ const onRestore = (e) => {
     .text {
       position: absolute;
       top: 100px;
-      right: 30px;
+      right: 20px;
       color: #fff;
       font-weight: 600;
     }

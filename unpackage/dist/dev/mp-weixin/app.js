@@ -11,6 +11,7 @@ if (!Math) {
   "./pages/index/index.js";
   "./pages/user/index.js";
   "./pages/user/views/changeUserInfo.js";
+  "./pages/user/views/integralLog.js";
   "./pages/login/index.js";
   "./pages/topic/index.js";
   "./pages/detail/index.js";

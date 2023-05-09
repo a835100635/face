@@ -44,7 +44,7 @@ const store = common_vendor.createStore({
      * @param {Object} state
      * @param {Object} params
      */
-    async loginAction({ commit, dispatch }, params) {
+    async loginAction({ commit, dispatch: dispatch2 }, params) {
       console.log("-登录参数", params);
       const {
         provider = "weixin",
@@ -67,7 +67,8 @@ const store = common_vendor.createStore({
         });
         commit("setLoginStatus", true);
         common_vendor.index.setStorage({ key: constants_index.HAS_LOGIN_NAME, data: true });
-        dispatch("updateUserInfoAction", newUserInfo);
+        dispatch2("updateUserInfoAction", newUserInfo);
+        dispatch2("refreshPage");
         common_vendor.index.showToast({
           title: "登录成功",
           icon: "success",
@@ -82,11 +83,39 @@ const store = common_vendor.createStore({
         });
       }
     },
-    // 更新用户信息
+    /**
+     * 退出登录
+     */
+    async logoutAction({ commit }) {
+      commit("setLoginStatus", false);
+      commit("setUserInfo", {});
+      commit("setAccessToken", "");
+      common_vendor.index.removeStorageSync(constants_index.HAS_LOGIN_NAME);
+      common_vendor.index.removeStorageSync(constants_index.TOKEN_NAME);
+      common_vendor.index.removeStorageSync(constants_index.USER_INFO_NAME);
+      common_vendor.index.showToast({
+        title: "退出成功",
+        icon: "none"
+      });
+      dispatch("refreshPage");
+    },
+    /**
+     * 更新用户信息
+     */
     async updateUserInfoAction({ commit }, params) {
       console.log("=updateUserInfoAction", params);
       commit("setUserInfo", params);
       common_vendor.index.setStorage({ key: constants_index.USER_INFO_NAME, data: params });
+    },
+    /**
+     * 刷新页面
+     */
+    refreshPage() {
+      const pages = getCurrentPages();
+      const prevPage = pages[pages.length - 1];
+      if (prevPage.refreshData) {
+        prevPage.refreshData();
+      }
     }
   },
   modules: {

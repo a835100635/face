@@ -83,12 +83,12 @@ const _sfc_main = {
       return common_vendor.e({
         a: common_assets._imports_0,
         b: common_vendor.p({
-          text: "让面试",
+          text: "让每个人都成为",
           size: 60,
           color: "#fff"
         }),
         c: common_vendor.p({
-          text: "不再是问题",
+          text: "终身学习的受益者",
           size: 40,
           color: "#fff"
         }),

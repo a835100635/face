@@ -85,12 +85,13 @@ const store = createStore({
 				uni.setStorage({ key: HAS_LOGIN_NAME, data: true });
 
 				dispatch('updateUserInfoAction', newUserInfo)
-
+				dispatch('refreshPage');
 				uni.showToast({
 					title: '登录成功',
 					icon: 'success',
 					duration: 1000
-				})
+				});
+
 			} catch (error) {
 				console.log('-登录失败', error)
 				uni.showToast({
@@ -100,11 +101,40 @@ const store = createStore({
 				})
 			}
 		},
-		// 更新用户信息
+		/**
+		 * 退出登录
+		 */
+		async logoutAction({ commit }) {
+			commit('setLoginStatus', false);
+			commit('setUserInfo', {});
+			commit('setAccessToken', '');
+			uni.removeStorageSync(HAS_LOGIN_NAME);
+			uni.removeStorageSync(TOKEN_NAME);
+			uni.removeStorageSync(USER_INFO_NAME);
+			uni.showToast({
+				title: '退出成功',
+				icon: 'none'
+			})
+			dispatch('refreshPage');
+		},
+		/**
+		 * 更新用户信息
+		 */
 		async updateUserInfoAction({ commit }, params) {
 			console.log('=updateUserInfoAction', params)
 			commit('setUserInfo', params);
 			uni.setStorage({ key: USER_INFO_NAME, data: params });
+		},
+		/**
+		 * 刷新页面
+		 */
+		refreshPage() {
+			// 刷新页面
+			const pages = getCurrentPages();
+			const prevPage = pages[pages.length - 1];
+			if (prevPage.refreshData) {
+				prevPage.refreshData();
+			}
 		}
 	},
 	modules: {

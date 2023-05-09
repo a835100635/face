@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/user/index",
     "pages/user/views/changeUserInfo",
+    "pages/user/views/integralLog",
     "pages/login/index",
     "pages/topic/index",
     "pages/detail/index",

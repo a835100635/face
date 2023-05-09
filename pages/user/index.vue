@@ -66,7 +66,10 @@
       </view>
 
       <!-- 我的积分 -->
-      <view class="container-item setting-item">
+      <view
+        class="container-item setting-item"
+        @click="jumpPage('/pages/user/views/integralLog')"
+      >
         <view class="container-item-icon">
           <i class="iconfont icon-jifen"></i>
         </view>
@@ -143,8 +146,8 @@
     </view>
 
     <!-- 退出登录 -->
-    <view class="container-block">
-      <view class="container-item">
+    <view class="container-block" v-if="isLogin">
+      <view class="container-item" @click="logout">
         <view class="container-item-icon">
           <i class="iconfont icon-tuichu"></i>
         </view>
@@ -195,6 +198,10 @@ import fuiBottomPopup from "@/components/firstui/fui-bottom-popup/fui-bottom-pop
 import { QINIU_URL } from "@/constants/index.js";
 
 const { state, getters, dispatch, commit } = useStore();
+// 是否登录
+const isLogin = computed(() => {
+  return userInfo.value && getters.checkLogin;
+});
 
 const userInfo = computed(() => getters.getUserInfo);
 // 获取头像
@@ -357,6 +364,10 @@ const handleUploadFileAction = (filePath) => {
     .finally(() => {
       uni.hideLoading();
     });
+};
+// 退出登录
+const logout = () => {
+  dispatch("logoutAction");
 };
 </script>
 

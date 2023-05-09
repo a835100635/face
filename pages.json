@@ -30,6 +30,13 @@
 			}
 		},
 		{
+			"path": "pages/user/views/integralLog",
+			"style": {
+				"navigationBarTitleText": "积分详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/login/index",
 			"style": {
 				"navigationBarTitleText": "登录",

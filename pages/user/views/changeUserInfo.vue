@@ -59,8 +59,8 @@ const info = ref({
 });
 
 const userInfo = computed(() => getters.getUserInfo); // 获取头像
-info.value.userName = userInfo.value.userName;
-info.value.slogan = userInfo.value.slogan;
+info.value.userName = userInfo.value.userName || "";
+info.value.slogan = userInfo.value.slogan || "";
 
 const isDisable = computed(() => {
   const { userName, slogan } = info.value;

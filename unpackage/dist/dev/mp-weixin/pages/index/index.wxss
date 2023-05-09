@@ -38,7 +38,7 @@
 .container .banner-wrap .text.data-v-1cf27b2a {
   position: absolute;
   top: 100px;
-  right: 30px;
+  right: 20px;
   color: #fff;
   font-weight: 600;
 }
