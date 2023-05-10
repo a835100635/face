@@ -2,7 +2,7 @@
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const common_vendor = require("./common/vendor.js");
 const store_index = require("./store/index.js");
-require("./constans/index.js");
+require("./constants/index.js");
 require("./api/user.js");
 require("./api/base.js");
 require("./store/modules/topic.js");
@@ -10,6 +10,8 @@ require("./api/topic.js");
 if (!Math) {
   "./pages/index/index.js";
   "./pages/user/index.js";
+  "./pages/user/views/changeUserInfo.js";
+  "./pages/user/views/integralLog.js";
   "./pages/login/index.js";
   "./pages/topic/index.js";
   "./pages/detail/index.js";

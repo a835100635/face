@@ -21,7 +21,20 @@
 				"enablePullDownRefresh": false,
 				"scrollIndicator": "none"
 			}
-
+		},
+		{
+			"path": "pages/user/views/changeUserInfo",
+			"style": {
+				"navigationBarTitleText": "个人信息",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/user/views/integralLog",
+			"style": {
+				"navigationBarTitleText": "积分详情",
+				"enablePullDownRefresh": false
+			}
 		},
 		{
 			"path": "pages/login/index",
@@ -71,7 +84,7 @@
 				"navigationBarTitleText": "资讯详情",
 				"enablePullDownRefresh": false
 			}
-		},
+		}
 	],
 	"tabBar": {
 		"color": "#ccc",

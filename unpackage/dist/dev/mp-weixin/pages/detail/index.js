@@ -1,7 +1,7 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const api_topic = require("../../api/topic.js");
-const constans_index = require("../../constans/index.js");
+const constants_index = require("../../constants/index.js");
 require("../../api/base.js");
 require("../../store/index.js");
 require("../../api/user.js");
@@ -37,14 +37,14 @@ const _sfc_main = {
       fetchLoading: false,
       loadingText: "加载中...",
       store: common_vendor.useStore(),
-      LIKE_STATUS: constans_index.LIKE_STATUS
+      LIKE_STATUS: constants_index.LIKE_STATUS
     };
   },
   computed: {
     // 是否选项 选择 判断
     isOption({ data }) {
       const { type } = data;
-      const { SELECT, JUDGE } = constans_index.TOPIC_TYPE;
+      const { SELECT, JUDGE } = constants_index.TOPIC_TYPE;
       return [SELECT, JUDGE].includes(type);
     },
     isDisablePre({ currentIndex }) {
@@ -56,7 +56,7 @@ const _sfc_main = {
     // 是否考试模式 1
     isTest({ options }) {
       const { checkType } = options || {};
-      return checkType && checkType == constans_index.CHECK_TYPE.READ;
+      return checkType && checkType == constants_index.CHECK_TYPE.READ;
     },
     topicIds({ store }) {
       return store.state.topic.topicData.data.map((i) => i.id);
@@ -122,9 +122,12 @@ const _sfc_main = {
       if (this.topicList.length < this.total && this.currentIndex === this.topicList.length) {
         const { pageNum } = this.query;
         const { dispatch, commit } = this.store;
-        commit("topic/changeQuery", Object.assign({}, this.query, {
-          pageNum: pageNum + 1
-        }));
+        commit(
+          "topic/changeQuery",
+          Object.assign({}, this.query, {
+            pageNum: pageNum + 1
+          })
+        );
         await dispatch("topic/getTopicListAction", {
           isReachBottom: true
         });
@@ -141,18 +144,18 @@ const _sfc_main = {
     },
     // 点赞状态的修改
     async likeStatusAction(status) {
-      const { LIKE, DISLIKE } = constans_index.LIKE_STATUS;
+      const { LIKE, DISLIKE } = constants_index.LIKE_STATUS;
       const { isLike, isDislike } = this.data;
       if (status === LIKE && isLike || status === DISLIKE && isDislike) {
         await api_topic.unlikeStatus({
-          type: constans_index.LIKE_TYPE.TOPIC,
+          type: constants_index.LIKE_TYPE.TOPIC,
           topicId: this.data.id
         });
         this.fetchData();
         return;
       }
       api_topic.changeLikeStatus({
-        type: constans_index.LIKE_TYPE.TOPIC,
+        type: constants_index.LIKE_TYPE.TOPIC,
         topicId: this.data.id,
         status
       }).then(() => {

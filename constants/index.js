@@ -60,3 +60,6 @@ export const LIKE_TYPE = {
 	// 评论
 	COMMENT: 'comment'
 }
+
+// 七牛云访问地址
+export const QINIU_URL = 'http://ru5yq3b1p.hn-bkt.clouddn.com/';
