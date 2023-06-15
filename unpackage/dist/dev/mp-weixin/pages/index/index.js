@@ -2,15 +2,16 @@
 const common_vendor = require("../../common/vendor.js");
 const common_assets = require("../../common/assets.js");
 const api_category = require("../../api/category.js");
+const constants_index = require("../../constants/index.js");
 require("../../api/base.js");
 require("../../store/index.js");
-require("../../constants/index.js");
 require("../../api/user.js");
 require("../../store/modules/topic.js");
 require("../../api/topic.js");
 if (!Array) {
   const _easycom_uni_notice_bar2 = common_vendor.resolveComponent("uni-notice-bar");
-  _easycom_uni_notice_bar2();
+  const _component_f_icon = common_vendor.resolveComponent("f-icon");
+  (_easycom_uni_notice_bar2 + _component_f_icon)();
 }
 const _easycom_uni_notice_bar = () => "../../node-modules/@dcloudio/uni-ui/lib/uni-notice-bar/uni-notice-bar.js";
 if (!Math) {
@@ -30,18 +31,17 @@ const _sfc_main = {
     const noticeText = common_vendor.ref(
       "[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"
     );
-    const data = common_vendor.ref([
-      {
-        label: "前端",
-        type: 0,
+    const data = common_vendor.ref(Object.values(constants_index.CATEGORY_TYPES).map((_) => {
+      return {
+        type: _.value,
+        label: _.label,
+        icon: null,
         child: []
-      },
-      {
-        label: "后端",
-        type: 1,
-        child: []
-      }
-    ]);
+      };
+    }));
+    const filterCategory = common_vendor.computed(() => {
+      return data.value.filter((_) => _.child.length > 1);
+    });
     (async () => {
       loadingText.value = "加载中...";
       isShowLoading.value = true;
@@ -62,6 +62,14 @@ const _sfc_main = {
       return data.value.filter((_) => _.child.length > 1);
     });
     const handleSelect = (main, child) => {
+      const { topicCount } = child;
+      if (topicCount === 0) {
+        common_vendor.index.showToast({
+          title: "暂无题目，敬请期待",
+          icon: "none"
+        });
+        return;
+      }
       common_vendor.index.navigateTo({
         url: `/pages/topic/index?categoryId=${child.categoryId}&title=${child.categoryName}`
       });
@@ -101,20 +109,25 @@ const _sfc_main = {
           ["background-color"]: "rgb(234, 242, 255)",
           text: noticeText.value
         }),
-        e: common_vendor.f(common_vendor.unref(category), (item, index, i0) => {
+        e: common_vendor.f(common_vendor.unref(filterCategory), (item, index, i0) => {
           return {
-            a: common_vendor.f(item.child, (child, k1, i1) => {
+            a: common_vendor.t(item.label),
+            b: common_vendor.f(item.child, (child, k1, i1) => {
               return {
-                a: common_vendor.n(`iconfont ${child.icon}`),
-                b: common_vendor.t(child.topicCount),
+                a: "1cf27b2a-5-" + i0 + "-" + i1 + "," + ("1cf27b2a-4-" + i0 + "-" + i1),
+                b: common_vendor.p({
+                  name: child.icon,
+                  size: ["30px", "30px"]
+                }),
                 c: common_vendor.t(child.categoryName),
-                d: common_vendor.o(($event) => handleSelect(item, child), child.categoryId),
-                e: child.categoryId,
-                f: "1cf27b2a-4-" + i0 + "-" + i1 + "," + ("1cf27b2a-3-" + i0)
+                d: common_vendor.t(child.topicCount),
+                e: common_vendor.o(($event) => handleSelect(item, child), child.categoryId),
+                f: child.categoryId,
+                g: "1cf27b2a-4-" + i0 + "-" + i1 + "," + ("1cf27b2a-3-" + i0)
               };
             }),
-            b: "1cf27b2a-3-" + i0,
-            c: index
+            c: "1cf27b2a-3-" + i0,
+            d: index
           };
         }),
         f: common_vendor.p({

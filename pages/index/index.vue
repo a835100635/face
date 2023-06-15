@@ -47,29 +47,24 @@
       <view class="category-main">
         <view
           class="category-item"
-          v-for="(item, index) in category"
+          v-for="(item, index) in filterCategory"
           :key="index"
         >
-          <!-- <view class="title">{{ item.label }}</view> -->
+          <view class="title">{{ item.label }}</view>
           <fui-row>
             <fui-col
               v-for="child in item.child"
               :key="child.categoryId"
               :span="12"
             >
-              <view class="col" @click="handleSelect(item, child)">
-                <view class="item">
-                  <view class="content">
-                    <view class="icon-top">
-                      <i :class="`iconfont ${child.icon}`" />
-                    </view>
-                    <view class="content-c">
-                      <view class="count">
-                        <span class="n">{{ child.topicCount }}</span
-                        >题</view
-                      >
-                      <view class="name">{{ child.categoryName }}</view>
-                    </view>
+              <view class="category-item-col" @click="handleSelect(item, child)">
+                <view class="menu-item">
+                  <view class="menu-item-icon">
+                    <f-icon :name="child.icon" :size="['30px', '30px']"></f-icon>
+                  </view>
+                  <view class="menu-item-content">
+                    <p class="label">{{ child.categoryName }}</p>
+                    <p class="count">{{ child.topicCount }}</p>
                   </view>
                 </view>
               </view>
@@ -102,6 +97,8 @@ import { getCategory } from "@/api/category.js";
 import { ref, computed } from "vue";
 import fuiEmpty from "@/components/firstui/fui-empty/fui-empty.vue";
 import emptyImg from "@/assets/images/empty.png";
+import { CATEGORY_TYPES } from "@/constants/index.js";
+
 
 const isShowLoading = ref(false);
 const loadingText = ref("加载中...");
@@ -111,18 +108,18 @@ const noticeText = ref(
   "[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"
 );
 
-const data = ref([
-  {
-    label: "前端",
-    type: 0,
+const data = ref(Object.values(CATEGORY_TYPES).map((_) => {
+  return {
+    type: _.value,
+    label: _.label,
+    icon: null,
     child: [],
-  },
-  {
-    label: "后端",
-    type: 1,
-    child: [],
-  },
-]);
+  };
+}));
+// 有题目的分类
+const filterCategory = computed(() => {
+  return data.value.filter((_) => _.child.length > 1);
+});
 // 获取分类
 (async () => {
   loadingText.value = "加载中...";
@@ -153,6 +150,14 @@ const navTo = (item) => {
 
 // 选择类型
 const handleSelect = (main, child) => {
+  const { topicCount } = child;
+  if (topicCount === 0) {
+    uni.showToast({
+      title: "暂无题目，敬请期待",
+      icon: "none",
+    });
+    return;
+  }
   uni.navigateTo({
     url: `/pages/topic/index?categoryId=${child.categoryId}&title=${child.categoryName}`,
   });
@@ -202,74 +207,50 @@ const onRestore = (e) => {
   }
 
   .category-main {
+    .title {
+      margin-bottom: 10px;
+      color: #333;
+    }
     .category-item {
       padding: 0 calc($padding-lt - 10px);
       border-radius: 8px;
-      .col {
-        padding: 0 10px 10px;
-        box-sizing: border-box;
-        background-color: transparent;
-        .item {
-          position: relative;
-          height: 100px;
-          background-color: #eef3f7;
-          box-shadow: 0px 15px 35px -5px rgba(50, 88, 130, 0.32);
-          border-radius: 15px;
-          .content {
-            height: 100%;
-            width: 100%;
-            color: #454d5a;
-            position: relative;
-            .icon-top {
-              position: absolute;
-              top: -7px;
-              right: 10px;
-              width: 50px;
-              height: 50px;
-              z-index: 2;
-              text-align: center;
-              line-height: 50px;
-              .iconfont {
-                font-size: 32px;
-              }
-              &::before {
-                content: "";
-                position: absolute;
-                display: block;
-                width: 100%;
-                height: 100%;
-                background-color: white;
-                box-shadow: 0px 10px 40px 0px rgba(109, 109, 109, 0.5);
-                z-index: -1;
-                opacity: 0.9;
-                border-radius: 15px;
-              }
-            }
-            .content-c {
-              position: absolute;
-              bottom: 10px;
-              left: 10px;
-              .name {
-                font-size: 18px;
-                font-weight: 600;
-              }
-              .count {
-                font-size: 14px;
-                .n {
-                  font-size: 20px;
-                  margin-right: 4px;
-                }
-              }
+      &-col {
+        padding: 0 10px;
+        margin-bottom: 20px;
+        .menu-item {
+          height: 50px;
+          background-color: white;
+          border-radius: 20px;
+          box-shadow: 0 0 0 5px rgba(0,0,0,0.1);
+          display: flex;
+          justify-content: space-between;
+          &-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .t-icon {
+              font-size: 30px;
             }
           }
-          .item-bg {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
+          &-content {
+            flex: 1;
+            padding: 0 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .label {
+              font-size: 16px;
+              color: #21bafb;
+              line-height: 1.5;
+            }
+            .count {
+              font-size: 12px;
+              color: #999;
+              line-height: 1.5;
+            }
           }
         }
       }
@@ -284,6 +265,6 @@ const onRestore = (e) => {
 
 <style lang="scss">
 .fui-row__box {
-  padding-bottom: 50px;
+  padding-bottom: 10px;
 }
 </style>
