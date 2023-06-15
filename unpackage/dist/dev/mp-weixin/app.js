@@ -32,9 +32,11 @@ const _sfc_main = {
   }
 };
 const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/lichunlin/code/gitHub/face/App.vue"]]);
+const FIcon = () => "./components/icon.js";
 function createApp() {
   const app = common_vendor.createSSRApp(App);
   app.use(store_index.store);
+  app.component("f-icon", FIcon);
   return {
     app
   };
