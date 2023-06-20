@@ -14,7 +14,7 @@
       <!-- 顶部banner -->
       <view class="banner-wrap">
         <image
-          src="../../assets/images/banner2.png"
+          src="../../assets/images/banner.png"
           class="banner"
           mode="aspectFill"
         ></image>
@@ -64,7 +64,7 @@
                   </view>
                   <view class="menu-item-content">
                     <p class="label">{{ child.categoryName }}</p>
-                    <p class="count">{{ child.topicCount }}</p>
+                    <p class="count">{{ child.topicCount || '暂无～' }}</p>
                   </view>
                 </view>
               </view>
@@ -105,11 +105,13 @@ const loadingText = ref("加载中...");
 // 下拉加载
 const isRefresher = ref(false);
 const noticeText = ref(
-  "[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"
+  "欢迎使用，如果您在使用过程中遇到问题，可以在反馈中心进行反馈，我们会及时处理。"
 );
 
 const data = ref(Object.values(CATEGORY_TYPES).map((_) => {
   return {
+    // 过滤掉特殊的
+    special: _.special,
     type: _.value,
     label: _.label,
     icon: null,
@@ -118,7 +120,7 @@ const data = ref(Object.values(CATEGORY_TYPES).map((_) => {
 }));
 // 有题目的分类
 const filterCategory = computed(() => {
-  return data.value.filter((_) => _.child.length > 1);
+  return data.value.filter((_) => _.child.length > 1 && !_.special);
 });
 // 获取分类
 (async () => {
@@ -158,8 +160,9 @@ const handleSelect = (main, child) => {
     });
     return;
   }
+  const { id , categoryName } = child;
   uni.navigateTo({
-    url: `/pages/topic/index?categoryId=${child.categoryId}&title=${child.categoryName}`,
+    url: `/pages/topic/index?categoryId=${id}&title=${categoryName}`,
   });
 };
 
@@ -237,7 +240,7 @@ const onRestore = (e) => {
           }
           &-content {
             flex: 1;
-            padding: 0 10px;
+            padding: 0 10px 0 0;
             display: flex;
             flex-direction: column;
             justify-content: center;

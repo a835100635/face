@@ -5,6 +5,7 @@
     "select-component": "./components/select",
     "fui-loading": "../../components/firstui/fui-loading/fui-loading",
     "comment": "../../components/comment",
-    "fui-icon": "../../components/firstui/fui-icon/fui-icon"
+    "fui-icon": "../../components/firstui/fui-icon/fui-icon",
+    "mp-html": "../../uni_modules/mp-html/components/mp-html/mp-html"
   }
 }

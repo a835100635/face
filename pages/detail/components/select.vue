@@ -34,14 +34,14 @@
 
     <!-- 答案解析 -->
     <fui-collapse v-if="answer">
-      <fui-collapse-item :open="true">
+      <fui-collapse-item :open="false">
         <view class="fui-item__box">
           <i class="iconfont icon-cankaodaan"></i>
-          <text class="title">问题解析</text>
+          <text class="title">解析</text>
         </view>
         <template v-slot:content>
           <view class="slot-content">
-            <mp-html class="mphtml" :content="answer"></mp-html>
+            <mp-html class="mphtml" :content="answer" imgtap="onImageTap"></mp-html>
           </view>
         </template>
       </fui-collapse-item>
@@ -81,7 +81,11 @@ export default {
   },
   computed: {
     answer({ data }) {
-      return data.answer;
+      if (data.answer) {
+        return data.answer;
+      } else {
+        return '暂无解析'
+      }
     },
     options({ data }) {
       const kyes = Object.keys(data.options || {});
@@ -99,6 +103,15 @@ export default {
   methods: {
     mpHtmlLoad() {
       console.log("mp-html load-->");
+    },
+    onImageTap(e) {
+      console.log("onImageTap-->", e);
+      const imageUrl = event.target.currentSrc; // 获取当前图片地址
+      if (/^\/face\/temporaryStorage/.test(imageUrl)) { // 判断是否为需要代理的图片地址格式
+        event.preventDefault(); // 阻止默认加载图片的行为
+        const newImageUrl = 'http://face-interview.online' + imageUrl; // 拼接新的图片地址
+        event.target.setAttribute('src', newImageUrl); // 设置图片的新地址
+      }
     },
   },
 };

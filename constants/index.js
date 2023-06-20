@@ -130,11 +130,15 @@ export const CATEGORY_TYPES = {
 	RESOURCE: {
 		label: '资源',
 		value: 13,
+    // 特殊分类
+    special: true
 	},
 	// 资讯
 	INFORMATION: {
 		label: '资讯',
 		value: 14,
+    // 特殊分类
+    special: true
 	},
 	// 其他
 	OTHER: {

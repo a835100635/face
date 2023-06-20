@@ -29,10 +29,12 @@ const _sfc_main = {
     const loadingText = common_vendor.ref("加载中...");
     const isRefresher = common_vendor.ref(false);
     const noticeText = common_vendor.ref(
-      "[单行] 这是 NoticeBar 通告栏，这是 NoticeBar 通告栏，这是 NoticeBar 通告栏"
+      "欢迎使用，如果您在使用过程中遇到问题，可以在反馈中心进行反馈，我们会及时处理。"
     );
     const data = common_vendor.ref(Object.values(constants_index.CATEGORY_TYPES).map((_) => {
       return {
+        // 过滤掉特殊的
+        special: _.special,
         type: _.value,
         label: _.label,
         icon: null,
@@ -40,7 +42,7 @@ const _sfc_main = {
       };
     }));
     const filterCategory = common_vendor.computed(() => {
-      return data.value.filter((_) => _.child.length > 1);
+      return data.value.filter((_) => _.child.length > 1 && !_.special);
     });
     (async () => {
       loadingText.value = "加载中...";
@@ -70,8 +72,9 @@ const _sfc_main = {
         });
         return;
       }
+      const { id, categoryName } = child;
       common_vendor.index.navigateTo({
-        url: `/pages/topic/index?categoryId=${child.categoryId}&title=${child.categoryName}`
+        url: `/pages/topic/index?categoryId=${id}&title=${categoryName}`
       });
     };
     const onPulling = (e) => {
@@ -120,7 +123,7 @@ const _sfc_main = {
                   size: ["30px", "30px"]
                 }),
                 c: common_vendor.t(child.categoryName),
-                d: common_vendor.t(child.topicCount),
+                d: common_vendor.t(child.topicCount || "暂无～"),
                 e: common_vendor.o(($event) => handleSelect(item, child), child.categoryId),
                 f: child.categoryId,
                 g: "1cf27b2a-4-" + i0 + "-" + i1 + "," + ("1cf27b2a-3-" + i0)
