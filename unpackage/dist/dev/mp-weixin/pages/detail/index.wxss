@@ -63,6 +63,19 @@
   padding: 0 10px;
   line-height: 1.8;
 }
+.detail-main .main-wrap .main .content .fui-item__box {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.detail-main .main-wrap .main .content .fui-item__box .iconfont {
+  font-size: 18px;
+  margin-right: 4px;
+}
+.detail-main .main-wrap .main .content .fui-item__box .title {
+  font-weight: 600;
+}
 .detail-main .footer {
   display: flex;
   justify-content: space-between;

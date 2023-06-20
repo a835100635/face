@@ -4,6 +4,13 @@
       <view class="main">
         <!-- 题目 -->
         <view class="topic"> {{ currentIndex }}、{{ data.topic }} </view>
+        <view class="content" v-if="data.topicDesc">
+          <view class="fui-item__box">
+            <i class="iconfont icon-cankaodaan"></i>
+            <text class="title">题目描述</text>
+          </view>
+          <mp-html class="mphtml" :content="data.topicDesc"></mp-html>
+        </view>
 
         <!-- 选项 判断 填空 -->
         <view class="content">
@@ -284,6 +291,19 @@ export default {
           margin-top: 10px;
           padding: 0 10px;
           line-height: 1.8;
+        }
+        .fui-item__box {
+          width: 100%;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          .iconfont {
+            font-size: 18px;
+            margin-right: 4px;
+          }
+          .title {
+            font-weight: 600;
+          }
         }
       }
     }

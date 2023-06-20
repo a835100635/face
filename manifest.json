@@ -71,6 +71,30 @@
 			"scope.userInfo": {
 				"desc": "..."
 			}
+		},
+		"proxy": {
+			"/face": {
+				"target": "http://face-interview.online",
+				"changeOrigin": true,
+				"pathRewrite": {
+					"^/face": ""
+				}
+			}
+		}
+	},
+	"h5": {
+		"devServer": {
+			"port": 8080,
+			"https": false,
+			"proxy": {
+				"/face": {
+					"target": "http://face-interview.online",
+					"changeOrigin": true,
+					"pathRewrite": {
+						"^/face": ""
+					}
+				}
+			}
 		}
 	},
 	"mp-alipay": {

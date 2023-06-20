@@ -12,7 +12,7 @@
         </view>
         <view class="example-body">
           <image
-            src="../../assets/images/banner2.png"
+            src="../../assets/images/banner.png"
             class="example-body-img"
             mode="aspectFill"
           ></image>

@@ -171,43 +171,54 @@ const _sfc_main = {
   }
 };
 if (!Array) {
+  const _easycom_mp_html2 = common_vendor.resolveComponent("mp-html");
   const _component_select_component = common_vendor.resolveComponent("select-component");
   const _component_comment = common_vendor.resolveComponent("comment");
   const _component_fui_icon = common_vendor.resolveComponent("fui-icon");
   const _component_fui_loading = common_vendor.resolveComponent("fui-loading");
-  (_component_select_component + _component_comment + _component_fui_icon + _component_fui_loading)();
+  (_easycom_mp_html2 + _component_select_component + _component_comment + _component_fui_icon + _component_fui_loading)();
+}
+const _easycom_mp_html = () => "../../uni_modules/mp-html/components/mp-html/mp-html.js";
+if (!Math) {
+  _easycom_mp_html();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {
+  return common_vendor.e({
     a: common_vendor.t($options.currentIndex),
     b: common_vendor.t($data.data.topic),
-    c: common_vendor.p({
+    c: $data.data.topicDesc
+  }, $data.data.topicDesc ? {
+    d: common_vendor.p({
+      content: $data.data.topicDesc
+    })
+  } : {}, {
+    e: common_vendor.p({
       data: $data.data
     }),
-    d: common_vendor.o((...args) => $options.goPrev && $options.goPrev(...args)),
-    e: common_vendor.n($options.isDisablePre && "disable"),
-    f: common_vendor.o((...args) => $options.goNext && $options.goNext(...args)),
-    g: common_vendor.n($options.isDisableNext && "disable"),
-    h: common_vendor.o(($event) => $options.likeStatusAction($data.LIKE_STATUS.LIKE)),
-    i: common_vendor.p({
+    f: common_vendor.o((...args) => $options.goPrev && $options.goPrev(...args)),
+    g: common_vendor.n($options.isDisablePre && "disable"),
+    h: common_vendor.o((...args) => $options.goNext && $options.goNext(...args)),
+    i: common_vendor.n($options.isDisableNext && "disable"),
+    j: common_vendor.o(($event) => $options.likeStatusAction($data.LIKE_STATUS.LIKE)),
+    k: common_vendor.p({
       name: "fabulous-fill",
       size: 44,
       color: $data.data.isLike ? "#ecc180" : "#ccc"
     }),
-    j: common_vendor.t($data.data.likeCount || 0),
-    k: common_vendor.o(($event) => $options.likeStatusAction($data.LIKE_STATUS.DISLIKE)),
-    l: common_vendor.p({
+    l: common_vendor.t($data.data.likeCount || 0),
+    m: common_vendor.o(($event) => $options.likeStatusAction($data.LIKE_STATUS.DISLIKE)),
+    n: common_vendor.p({
       name: "stepon-fill",
       size: 44,
       color: $data.data.isDislike ? "#ecc180" : "#ccc"
     }),
-    m: common_vendor.t($data.data.dislikeCount || 0),
-    n: $data.fetchLoading,
-    o: common_vendor.p({
+    o: common_vendor.t($data.data.dislikeCount || 0),
+    p: $data.fetchLoading,
+    q: common_vendor.p({
       type: "col",
       text: $data.loadingText
     })
-  };
+  });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/lichunlin/code/gitHub/face/pages/detail/index.vue"]]);
 wx.createPage(MiniProgramPage);
