@@ -3,7 +3,7 @@
   <view class="comment">
     <view class="label">
       <text>
-        留言列表
+        评论列表
         <text class="total">({{ commentData.total }})</text>
       </text>
       <!-- 评论 -->
