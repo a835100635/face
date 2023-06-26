@@ -173,10 +173,9 @@ const _sfc_main = {
 if (!Array) {
   const _easycom_mp_html2 = common_vendor.resolveComponent("mp-html");
   const _component_select_component = common_vendor.resolveComponent("select-component");
-  const _component_comment = common_vendor.resolveComponent("comment");
   const _component_fui_icon = common_vendor.resolveComponent("fui-icon");
   const _component_fui_loading = common_vendor.resolveComponent("fui-loading");
-  (_easycom_mp_html2 + _component_select_component + _component_comment + _component_fui_icon + _component_fui_loading)();
+  (_easycom_mp_html2 + _component_select_component + _component_fui_icon + _component_fui_loading)();
 }
 const _easycom_mp_html = () => "../../uni_modules/mp-html/components/mp-html/mp-html.js";
 if (!Math) {

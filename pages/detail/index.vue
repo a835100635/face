@@ -19,8 +19,8 @@
           <!-- 填空  -->
         </view>
 
-        <!-- 留言列表 -->
-        <comment></comment>
+        <!-- 留言列表 TODO: 延后开发-->
+        <!-- <comment ></comment> -->
       </view>
     </view>
     <view class="footer">
